@@ -1,0 +1,237 @@
+---
+title: "Domestic citation analysis"
+author: "Zuguang Gu ( z.gu@dkfz.de )"
+date: '`r Sys.Date()`'
+output: 
+  html_document:
+    toc: true
+    fig_caption: true
+---
+
+```{r, echo = FALSE, message = FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+    error = FALSE,
+    tidy  = FALSE,
+    message = FALSE,
+    warning = FALSE,
+    fig.width = 6, fig.height = 6,
+    fig.align = "center"
+)
+```
+
+We first load the results of domestic citation analysis.
+
+```{r}
+df2 = readRDS("domestic_enrichment.rds")
+head(df2)
+```
+
+We will use the following columns:
+
+- `citations`: The number of citations that a country A cites itself, denoted as $k_{A-A}$.
+- `total_cited`: The number of total citations that A is cited globally, denoted as $m_{A-}$.
+- `total_citing`: The number of total citations that A cites globally, denoted as $n_{-A}$.
+- `global_citation`: The total number of citations in the globe, denoted as $N$.
+- `expected`: The expected number of citations that A cites itself, calculated as $m_{A-}n_{-A}/N$.
+- `log2_fc`: The enrichment score.
+
+
+Emperically, $k_{A-A}$ has linear relations to $n_{-A}$ and $m_{A-}$, and it can be demonstrated by the following
+two scatter plots (each data point corresponds to one country):
+
+$$
+\begin{align*}
+\log_2 n_{-A} &= a_1 \cdot \log_2 k_{A-A} + b_1 \\
+\log_2 m_{A-} &= a_2 \cdot \log_2 k_{A-A} + b_2 \\
+\end{align*}
+$$
+
+
+```{r, fig.width = 10}
+par(mfrow = c(1, 2))
+plot(df2$citations, df2$total_citing, log = "xy", xlab = "# Domestic citations", ylab = "# Citations A cites")
+plot(df2$citations, df2$total_cited,  log = "xy", xlab = "# Domestic citations", ylab = "# Citations A is cited")
+```
+
+We can fit linear regression models on the log2-scale:
+
+```{r}
+summary(lm(log2(df2$total_citing) ~ log2(df2$citations)))
+summary(lm(log2(df2$total_cited) ~ log2(df2$citations)))
+```
+
+In the manuscript, we demonstrated there is a negative linear relation between the enrichment scores and the number
+of domestic citations:
+
+$$
+\begin{align*}
+s_{A-A} &= \log_2 k_{A-A} - \log_2 n_{-A} + \log_2 N - \log_2 m_{A-} \\
+  &= (1 - a_1 - a_2) \log_2 k + \log_2 N - b_1 - b_2 \\
+  &= -0.70 \log_2 k_{A-A} + 16.41
+\end{align*}
+$$
+
+
+```{r}
+plot(df2$citations, df2$log2_fc, log = "x", xlab = "# Domestic citations", ylab = "Enrichment scores")
+```
+
+In this document, we will prove when there are positive enrichment, $a_1 + a_2 > 1$ and it results in the decrease
+of the enrichment scores.
+
+First let's simplify the notations: $k_{A-A}$ to $k$, $m_{A-}$ to $m$ and $n_{-A}$ to $n$. From the two linear fits, we have:
+
+
+$$
+\begin{align*}
+n &= k^{a_1} \cdot 2^{b_1} \\
+m &= k^{a_2} \cdot 2^{b_2} \\
+mn &= k^{a_1 + a_2} \cdot 2^{b_1 + b_2} \\
+\end{align*}
+$$
+
+Denote $k_\mathrm{exp}$ as the expected number of citations, and $mn$ can also be calculated as:  
+
+$$
+mn = k_\mathrm{exp}N
+$$
+
+It is easy to see, when there is no enrichment of domestic citations, $a_1 + a_2 = 1$.
+
+Now we have:
+
+$$
+k^{a_1 + a_2} \cdot 2^{b_1 + b_2} = k_\mathrm{exp}N
+$$
+
+Since all the countries share the same coeffcients from the linear fit, we can simply treat different countries
+correspond to different stages of the citation network expansion, where small countries correspond to early states.
+Then for two countries with $k_2 > k_1$ and $k_{\mathrm{exp},2} > k_{\mathrm{exp},1}$, we divide the previous equation on both sides:
+
+$$
+\begin{align*}
+\left( \frac{k_2}{k_1} \right)^{a_1 + a_2} &= \frac{k_{\mathrm{exp},2}}{k_{\mathrm{exp},1}} \\
+(a_1 + a_2)\cdot \log(k_2/k_1) &= \log(k_{\mathrm{exp},2}/k_{\mathrm{exp},1}) \\
+a_1 + a_2 &= \frac{\log(k_{\mathrm{exp},2}/k_{\mathrm{exp},1})}{\log(k_2/k_1)} \\
+\end{align*}
+$$
+
+Denote $T_{A-A}$, $T_{A-}$ and $T_{-A}$ as the citation networks constructed by the citation relations in the three groups (A-domestic, A-citing
+and A-cited). Let's assume from country 1 to 2, $T_{A-}$ and $T_{-A}$ both expands by a factor of $\alpha$ ($\alpha > 1$), i.e. $m_2 = \alpha \cdot m_1$ and $n_2 = \alpha \cdot n_1$. Then the expansion rate of the citation network if there is no enrichment is
+
+$$
+\frac{k_{\mathrm{exp},2}}{k_{\mathrm{exp},1}} = \frac{m_2n_2/N}{m_1n_2/N} = \alpha^2
+$$
+
+Next we look at the expansion rate of $k_2/k_1$. If there is an over-representation, $k$ can be decomposed to
+
+$k = k_\mathrm{exp} + k_\mathrm{diff}$
+
+where $k_\mathrm{diff}$ is the over-represented portion of $k$. It can be expected that when $m$ or $n$ increases, $k_\mathrm{diff}$
+also increases. Now the question is does it increase by a fixed a rate or does it still depends on $m$ or $n$ (i.e. increase faster when $m$ or $n$ gets larger?)
+
+We next check how $k_\mathrm{diff}/m$ or $k_\mathrm{diff}/n$ changes to the size of $T_{A-}$ and $T_{-A}$, i.e. 
+
+
+```{r, fig.width = 10}
+diff = df2$citations - df2$expected
+par(mfrow = c(1, 2))
+plot(df2$total_cited, diff/df2$total_cited, log = "x", xlab = "# Citations A is cited (m)", ylab = "diff/m")
+plot(df2$total_citing, diff/df2$total_citing, log = "x", xlab = "# Citations A cites (n)", ylab = "diff/n")
+```
+
+We can see, in both plots, there is a positive linear relations in the log-scale. Let's fit the two linear models.
+Note China (index = 11) and United States (index = 80) are removed from the fitting because they are outliers on the scatter plots.
+
+```{r}
+p1 = diff/df2$total_citing
+summary(lm(p1[-c(11, 80)] ~ log(df2$total_citing[-c(11, 80)])))
+
+p2 = diff/df2$total_cited
+summary(lm(p2[-c(11, 80)] ~ log(df2$total_cited[-c(11, 80)])))
+```
+
+
+
+Both slope and intercept coeffcients are very small. To reduce the complexity of the followig equations, we assume $m = n$. 
+We discuss the following two scenarios.
+
+**Scenario 1**: there is a weak positive relations between $p$ and $m$ on the log-scale, thus on the normal scale, we can approximate
+$p$ as a constant and not dependent to $m$, i.e.:
+
+$$
+\begin{align*}
+k_\mathrm{diff} &= pm \\
+k &= k_\mathrm{exp} + pm \\
+\end{align*}
+$$
+
+Then we can calculate $k_2/k_1$ as:
+
+$$
+\begin{align*}
+\frac{k_2}{k_1} &= \frac{k_{\mathrm{exp},2} + p m_2}{k_{\mathrm{exp},1} + p m_1} \\
+ &= \frac{\alpha^2 k_{\mathrm{exp},1} + p \alpha m_1}{k_{\mathrm{exp},1} + p m_1} \\
+  &= \frac{\alpha^2 (k_{\mathrm{exp},1} + p m_1 ) + p \alpha m_1 - p \alpha^2 m_1}{k_{\mathrm{exp},1} + p m_1} \\
+  &= \alpha^2 - \frac{p \alpha(\alpha - 1) m_1}{k_{\mathrm{exp},1} + p m_1} \\ 
+\end{align*}
+$$
+
+Note since $\alpha > 1$, we have $k_2/k_1 < \alpha^2$.
+
+In the equation, it also shows the expansion of the citation network can be decomposed into two parts, the part without 
+citation enrichment which grows in quadratic speed ($\sim \alpha^2$), and the "over-represented" part which grows in linear
+speed ($\sim \alpha$). Mixing these two speeds results the final speed being weak than quadratic.
+
+
+**Scenario 2**: let's assume there is the following relation where $p$ is dependent on $\log m$. Note for simplicity we 
+removed the intercept (the value of the intercept is very small and it can be ignored).
+
+$$
+p = w \log(m)
+$$
+
+where $w$ is slop coeffcient from the liear fit.
+
+Then $k_2/$k_1$ can be written as:
+
+$$
+\begin{align*}
+\frac{k_2}{k_1} &= \frac{k_{\mathrm{exp},2} + p_2 \cdot m_2}{k_{\mathrm{exp},1} + p_1 \cdot m_1} \\
+ &= \frac{\alpha^2 \cdot k_{\mathrm{exp},1} + (w\log (\alpha m_1)) \cdot \alpha m_1}{k_{\mathrm{exp},1} + (w\log m_1) \cdot m_1} \\
+  &= \frac{\alpha^2 (k_{\mathrm{exp},1} + w m_1 \log m_1 ) - \alpha^2 w m_1\log m_1 + \alpha w m_1 \log \alpha  + \alpha w m_1 \log m_1}{k_{\mathrm{exp},1} + w m_1 \log m_1} \\
+  &= \alpha^2 - \frac{\alpha w m_1 \left[ (\alpha - 1) \log m_1 - \log \alpha \right]}{k_{\mathrm{exp},1} + w m_1 \log m_1} \\ 
+\end{align*}
+$$
+
+where $\log m_1$ is much larger than $\log \alpha$, which also results in $k_2/k_1 < \alpha^2$.
+
+In this case, in the expansion of the citation network, the "over-represented" part grows in a speed of $\sim \alpha \log \alpha$, but
+still slower than the quadratic.
+
+For both scenarios, we can have:
+
+$$
+\begin{align*}
+k_{\mathrm{exp},2}/ k_{\mathrm{exp},1} &> k_2 / k_1 > 1 \\
+\log(k_{\mathrm{exp},2}/ k_{\mathrm{exp},1}) &> \log( k_2 / k_1 ) > 0 \\
+\end{align*}
+$$
+
+And eventually 
+
+$$
+a_1 + a_2 = \frac{\log(k_{\mathrm{exp},2}/k_{\mathrm{exp},1})}{\log(k_2/k_1)} > 1
+$$
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

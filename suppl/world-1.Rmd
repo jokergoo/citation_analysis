@@ -1,0 +1,109 @@
+---
+title: "Mutual influence between West-1 to other groups of countries"
+author: "Zuguang Gu ( z.gu@dkfz.de )"
+date: '`r Sys.Date()`'
+output: 
+  html_document:
+    toc: true
+    fig_caption: true
+---
+
+```{r, echo = FALSE, message = FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+    error = FALSE,
+    tidy  = FALSE,
+    message = FALSE,
+    warning = FALSE,
+    fig.align = "center"
+)
+```
+
+
+We load the data. `m` is the influence matrix between 72 countries. `mem` is the clustering results from the graph clustering analysis.
+
+```{r}
+library(ComplexHeatmap)
+library(circlize)
+
+m = readRDS("mat_influence.rds")
+mem = readRDS("country_groups.rds")
+
+lt = split(names(mem), mem)
+lt
+```
+
+To be the same as in the manuscript, we extract countries in West-1 (group-1), and perform 
+the Louvain graph clustering method to partition West-1 into three subgroups:
+
+```{r}
+cn = lt[["2"]]
+subm = m[cn, cn]
+subm2 = subm
+subm2[is.na(subm2)] = 0
+subm2[subm2 < 0] = 0
+library(igraph)
+g2 = graph_from_adjacency_matrix(subm2, mode = "plus", weighted = TRUE)
+
+set.seed(666)
+mem2 = membership(cluster_louvain(g2, weight = sqrt(E(g2)$weight), resolution = 1.1))
+mem2 = factor(mem2, levels = c(3, 1, 2))
+levels(mem2) = c("Northern Europe", "English-speaking", "Mainland Europe")
+mem2
+```
+
+And the heatmap the same as Figure 7 in the main manuscript:
+
+```{r, fig.width = 6, fig.height = 5.5}
+col_fun = colorRamp2(c(-2, 0, 2), c("blue", "white", "red"))
+ht = Heatmap(subm, name = "Enrichment score",
+	row_title = "Cited/influencing countries",
+	column_title = "Citing/influenced countries", column_title_side = "bottom",
+	col = col_fun,
+	row_split = mem2, column_split = mem2,
+	na_col = "#DDDDDD",
+	cluster_row_slices = FALSE, cluster_column_slices = FALSE,
+	show_row_dend = FALSE, show_column_dend = FALSE,
+	border = "black",
+	width = unit(4, "mm")*nrow(subm),
+	height = unit(4, "mm")*ncol(subm)
+)
+
+draw(ht, column_title = "Influence map only in West-1 countries",
+	heatmap_legend_list = list(Legend(at = "Not available", legend_gp = gpar(fill = "#DDDDDD"))))
+```
+
+We remove Estonia and Luxembourg because most of the enrichment values are missing between they two and other
+countries in World-2.
+
+```{r}
+cn = setdiff(cn, c("Estonia", "Luxembourg"))
+mem2 = mem2[!names(mem2) %in% c("Estonia", "Luxembourg")]
+mem2_col = c("Northern Europe" = 2, "English-speaking" = 3, "Mainland Europe" = 4)
+```
+
+The first heatmap shows how World-1 countries influence World-2.
+
+```{r, fig.width = 10, fig.height = 5}
+cn2 = setdiff(names(mem), c(lt[["2"]], "United States"))
+Heatmap(m[cn, cn2], name = "Enrichment score",
+	col = col_fun,
+	right_annotation = rowAnnotation(group = mem2, col = list(group = mem2_col)),
+	column_title = "How World-1 influences World-2",
+	column_split = mem[cn2]
+)
+```
+
+The second heatmap shows how World-1 is influenced by World-2.
+
+```{r, fig.width = 6, fig.height = 10}
+draw(Heatmap(m[cn2, cn], name = "Enrichment score",
+	col = col_fun,
+	top_annotation = HeatmapAnnotation(group = mem2, col = list(group = mem2_col)),
+	column_title = "How World-1 is influenced by World-2",
+	row_split = mem[cn2]
+), merge_legends = TRUE)
+```
+
+The classification of "Northern Europe/English-speaking/Mainland Europe" cannot be observed in both heatmaps.
+
