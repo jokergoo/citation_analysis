@@ -1,5 +1,5 @@
 ---
-title: "Mutual influence between West-1 to other groups of countries"
+title: "Mutual influence between West-1 and World-2"
 author: "Zuguang Gu ( z.gu@dkfz.de )"
 date: '`r Sys.Date()`'
 output: 
@@ -89,21 +89,30 @@ cn2 = setdiff(names(mem), c(lt[["2"]], "United States"))
 Heatmap(m[cn, cn2], name = "Enrichment score",
 	col = col_fun,
 	right_annotation = rowAnnotation(group = mem2, col = list(group = mem2_col)),
-	column_title = "How World-1 influences World-2",
+	column_title = "How West-1 influences World-2",
 	column_split = mem[cn2]
 )
 ```
 
-The second heatmap shows how World-1 is influenced by World-2.
+The second heatmap shows how West-1 is influenced by World-2.
 
 ```{r, fig.width = 6, fig.height = 10}
 draw(Heatmap(m[cn2, cn], name = "Enrichment score",
 	col = col_fun,
 	top_annotation = HeatmapAnnotation(group = mem2, col = list(group = mem2_col)),
-	column_title = "How World-1 is influenced by World-2",
+	column_title = "How West-1 is influenced by World-2",
 	row_split = mem[cn2]
 ), merge_legends = TRUE)
 ```
 
 The classification of "Northern Europe/English-speaking/Mainland Europe" cannot be observed in both heatmaps.
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 

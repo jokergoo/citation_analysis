@@ -433,7 +433,7 @@ scale_segment = function(x, min = 1, max = 5) {
 	(abs(x) - 0.15)/(1.6-0.15)*(max-min) + min
 }
 
-plot_hc = function(hc) {
+plot_hc = function(hc, ann = TRUE, fontsize = 8) {
     x = order(hc$order)
     nobs = length(x)
 
@@ -466,9 +466,9 @@ plot_hc = function(hc) {
             midpoint[i] = (x[ -child1 ] + x[ -child2 ])/2
  
             grid.segments(x[ -child1 ], hc$height[i], x[ -child1 ], end, default.units = "native")
-            grid.text(hc$labels[-child1], x[ -child1 ], end - hang*0.4, default.units = "native", rot = 90, just = "right", gp = gpar(fontsize = 8))
+            grid.text(hc$labels[-child1], x[ -child1 ], end - hang*0.4, default.units = "native", rot = 90, just = "right", gp = gpar(fontsize = fontsize))
             grid.segments(x[ -child2 ], hc$height[i], x[ -child2 ], end, default.units = "native")
-            grid.text(hc$labels[-child2], x[ -child2 ], end - hang*0.4, default.units = "native", rot = 90, just = "right", gp = gpar(fontsize = 8))
+            grid.text(hc$labels[-child2], x[ -child2 ], end - hang*0.4, default.units = "native", rot = 90, just = "right", gp = gpar(fontsize = fontsize))
         } else if(child1 < 0 && child2 > 0) {
             grid.segments(x[ -child1 ], 
                      hc$height[i],
@@ -476,7 +476,7 @@ plot_hc = function(hc) {
                      hc$height[i], default.units = "native")
             midpoint[i] = (x[ -child1 ] + midpoint[ child2 ])/2
             grid.segments(x[ -child1 ], hc$height[i], x[ -child1 ], end, default.units = "native")
-            grid.text(hc$labels[-child1], x[ -child1 ], end - hang*0.4, default.units = "native", rot = 90, just = "right", gp = gpar(fontsize = 8))
+            grid.text(hc$labels[-child1], x[ -child1 ], end - hang*0.4, default.units = "native", rot = 90, just = "right", gp = gpar(fontsize = fontsize))
             grid.segments(midpoint[ child2 ], hc$height[i], midpoint[ child2 ], hc$height[ child2 ], default.units = "native")
         } else if(merge[i, 1] > 0 && merge[i, 2] < 0) {
             grid.segments(midpoint[ child1 ], 
@@ -486,7 +486,7 @@ plot_hc = function(hc) {
             midpoint[i] = (midpoint[ child1 ] + x[ -child2 ])/2
             grid.segments(midpoint[ child1 ], hc$height[i], midpoint[ child1 ], hc$height[ child1 ], default.units = "native")
             grid.segments(x[ -child2 ], hc$height[i], x[ -child2 ], end, default.units = "native")
-            grid.text(hc$labels[-child2], x[ -child2 ], end - hang*0.4, default.units = "native", rot = 90, just = "right", gp = gpar(fontsize = 8))
+            grid.text(hc$labels[-child2], x[ -child2 ], end - hang*0.4, default.units = "native", rot = 90, just = "right", gp = gpar(fontsize = fontsize))
         } else {
             grid.segments(midpoint[ child1 ], 
                      hc$height[i],
@@ -497,8 +497,10 @@ plot_hc = function(hc) {
             grid.segments(midpoint[ child2 ], hc$height[i], midpoint[ child2 ], hc$height[ child2 ], default.units = "native")
         }
     }
-    grid.annotation_axis(side = "left", gp = gpar(fontsize = 8))
-    grid.text("2 - enrichment score", x = unit(-6, "mm"), y = 0.5, rot = 90, gp = gpar(fontsize = 10), just = "bottom")
+    if(ann) {
+	    grid.annotation_axis(side = "left", gp = gpar(fontsize = 8))
+	    grid.text("2 - enrichment score", x = unit(-6, "mm"), y = 0.5, rot = 90, gp = gpar(fontsize = fontsize+2), just = "bottom")
+	}
     popViewport()
 }
 
@@ -728,27 +730,9 @@ country = "United States"
 
 do_country = function(country, name, a1 = 1, a2 = 1, b1 = 3, b2 = 3) {
 
-	if(identical(country, "United States")) {
-		x1 = m_with_NA[, country]
-		x2 = m_with_NA[country, ]
-	} else {
-		x1 = apply(m_with_NA[, country, drop = FALSE], 1, function(x) {
-			x = x[!is.na(x)]
-			if(length(x) <= 1) {
-				NA
-			} else {
-				mean(x)
-			}
-		})
-		x2 = apply(m_with_NA[country, , drop = FALSE], 2, function(x) {
-			x = x[!is.na(x)]
-			if(length(x) <= 1) {
-				NA
-			} else {
-				mean(x)
-			}
-		})
-	}
+	x1 = m_with_NA[, country]
+	x2 = m_with_NA[country, ]
+	
 	x2 = x2[names(x1)]
 
 	l = x1 != 0 & x2 != 0 & !is.na(x1) & !is.na(x2) & (!names(x1) %in% mel[["Africa"]])
@@ -775,37 +759,84 @@ do_country = function(country, name, a1 = 1, a2 = 1, b1 = 3, b2 = 3) {
 		} else {
 			l = mem[names(x1)] %in% c(1, 3, 4, 5, 6)
 		}
-		x = x1[l] + x2[l]
-		y = x2[l] - x1[l]
-	    fit = lm(y ~ x)
-	    slop = (1+fit$coefficients[2])/(1-fit$coefficients[2])
-	    intercept = fit$coefficients[1]/(1-fit$coefficients[2])
+		# x = x1[l] + x2[l]
+		# y = x2[l] - x1[l]
+	    # fit = lm(y ~ x)
+	    # slop = (1+fit$coefficients[2])/(1-fit$coefficients[2])
+	    # intercept = fit$coefficients[1]/(1-fit$coefficients[2])
+	    fit = rotate_lm(x2[l], x1[l])
+	    slop = fit$coefficients[2]
+	    intercept = fit$coefficients[1]
 	    grid.lines(range(x1[l]), intercept + slop*range(x1[l]), default.units = "native", gp = gpar(col = k, lwd = 2))
 
 	    data.frame(slop = slop, intercept = intercept, group = name, k = ifelse(k == 1, "world1", "world2"),
-	    	balance = sqrt(2)*mean(predict(fit, data.frame(x))))
+	    	balance = mean(x2[l] - x1[l]),
+	    	r2 = fit$r2
+	    )
 	}))
 	popViewport()
     
     df
 }
 
+rotate_lm = function(y, x) {
+	fit = lm(y ~ x)
 
+	d = cooks.distance(fit)
+	l = d <= 0.5
+
+	x = x[l]
+	y = y[l]
+
+	y2 = y - x
+	x2 = y + x
+
+	fit = lm(y2 ~ x2)
+
+	slop = (1+fit$coefficients[2])/(1-fit$coefficients[2])
+	intercept = fit$coefficients[1]/(1-fit$coefficients[2])
+
+	r2 = 1 - sum((y - (intercept + slop*(x)))^2)/sum( (y - mean(y))^2 )
+
+	list(coefficients = c(intercept, slop), r2 = r2)
+}
 
 mel = split(names(mem_name), mem_name)
 lt = list()
 pl = list()
-pl[["US"]] = grid.grabExpr(lt[["US"]] <- do_country(mel[["US"]], "US", a2 = 0.5, a1 = 1.2, b1 = 2.5, b2 = 1))
-pl[["West-1"]] = grid.grabExpr(lt[["West-1"]] <- do_country(mel[["West-1"]], "West-1", a2 = 0.5, b1 = 1.5, b2 = 1))
-pl[["Europe-2"]] = grid.grabExpr(lt[["Europe-2"]] <- do_country(mel[["Europe-2"]], "Europe-2", a2 = 0.6, b1 = 1.5, b2 = 1.5))
-pl[["Europe-3"]] = grid.grabExpr(lt[["Europe-3"]] <- do_country(mel[["Europe-3"]], "Europe-3", a1 = 0.6,  b1 = 2))
-pl[["Latin-America"]] = grid.grabExpr(lt[["Latin-America"]] <- do_country(mel[["Latin-America"]], "Latin-America", a2 = 0.8, a1 = 0.8, b1 = 2, b2 = 4))
-pl[["Mid-East"]] = grid.grabExpr(lt[["Mid-East"]] <- do_country(mel[["Mid-East"]], "Mid-East", b2 = 5, b1 = 2, a1 = 1))
-pl[["Asia-2"]] = grid.grabExpr(lt[["Asia-2"]] <- do_country(mel[["Asia-2"]], "Asia-2", b2 = 4.5, b1 = 2, a1 = 1, a2 = 1))
-pl[["Asia-1"]] = grid.grabExpr(lt[["Asia-1"]] <- do_country(mel[["Asia-1"]], "Asia-1", b2 = 1.6, b1 = 1.5, a2 = 0.8))
+pl[["US"]] = grid.grabExpr(lt[["US"]] <- do_country("United States", "US", a2 = 0.5, a1 = 1.2, b1 = 2.5, b2 = 1))
+pl[["Netherlands"]] = grid.grabExpr(lt[["Netherlands"]] <- do_country("Netherlands", "Netherlands", a2 = 0.5, b1 = 1.7, b2 = 1.1))
+pl[["Spain"]] = grid.grabExpr(lt[["Spain"]] <- do_country("Spain", "Spain", a2 = 0.6, b1 = 1.5, b2 = 1.5))
+pl[["Poland"]] = grid.grabExpr(lt[["Poland"]] <- do_country("Poland", "Poland", a1 = 0.8,  b1 = 2))
+pl[["Brazil"]] = grid.grabExpr(lt[["Brazil"]] <- do_country("Brazil", "Brazil", a2 = 1.2, a1 = 0.8, b1 = 2, b2 = 4))
+pl[["Saudi Arabia"]] = grid.grabExpr(lt[["Saudi Arabia"]] <- do_country("Saudi Arabia", "Saudi Arabia", b2 = 5.3, b1 = 2, a1 = 1))
+pl[["Thailand"]] = grid.grabExpr(lt[["Thailand"]] <- do_country("Thailand", "Thailand", b2 = 4.7, b1 = 2, a1 = 1, a2 = 1))
+pl[["China"]] = grid.grabExpr(lt[["China"]] <- do_country("China", "China", b2 = 1.6, b1 = 2, a2 = 1))
+pl[["Hong Kong"]] = grid.grabExpr(lt[["Hong Kong"]] <- do_country("Hong Kong", "Hong Kong", b2 = 2.5, b1 = 1.5, a2 = 0.8))
 
 
-pdf("figures/figure8.pdf", width = 13, height = 6)
+tbb = data.frame(
+	slop1 = sapply(lt, function(x) x[1, "slop"]),
+	intercept1 = sapply(lt, function(x) x[1, "intercept"]),
+	balance1 = sapply(lt, function(x) x[1, "balance"]),
+	r2_1 = sapply(lt, function(x) x[1, "r2"]),
+	slop2 = sapply(lt, function(x) x[2, "slop"]),
+	intercept2 = sapply(lt, function(x) x[2, "intercept"]),
+	balance2 = sapply(lt, function(x) x[2, "balance"]),
+	r2_2 = sapply(lt, function(x) x[2, "r2"])
+)
+rownames(tbb) = names(lt)
+
+plot(tbb[, 1], tbb[, 3])
+text(tbb[, 1], tbb[, 3], rownames(tbb))
+abline(h = 1, col = "grey")
+abline(v = 1, col = "grey")
+
+tbb2 = apply(tbb, 2, scale)
+rownames(tbb2) = rownames(tbb)
+
+
+pdf("figures/figure8.pdf", width = 15, height = 6)
 grid.newpage()
 pushViewport(viewport(x = unit(5, "cm")))
 grid.draw(pl[[1]])
@@ -819,61 +850,52 @@ pushViewport(viewport(x = unit(9.8, "cm")))
 grid.draw(pl[[3]])
 popViewport()
 
-pushViewport(viewport(x = unit(11.8, "cm")))
+pushViewport(viewport(x = unit(12, "cm")))
 grid.draw(pl[[4]])
 popViewport()
 
-pushViewport(viewport(x = unit(14.7, "cm")))
+pushViewport(viewport(x = unit(14.9, "cm")))
 grid.draw(pl[[5]])
 popViewport()
 
-pushViewport(viewport(x = unit(17.6, "cm")))
+pushViewport(viewport(x = unit(18.3, "cm")))
 grid.draw(pl[[6]])
 popViewport()
 
-pushViewport(viewport(x = unit(20.8, "cm")))
+pushViewport(viewport(x = unit(21.4, "cm")))
 grid.draw(pl[[7]])
 popViewport()
 
-pushViewport(viewport(x = unit(24, "cm")))
+pushViewport(viewport(x = unit(24.6, "cm")))
 grid.draw(pl[[8]])
 popViewport()
 
+pushViewport(viewport(x = unit(27.8, "cm")))
+grid.draw(pl[[9]])
+popViewport()
 
 lgd = Legend(title = "Region", title_position = "topleft", at = names(mem_color[-7]), type = "points", legend_gp = gpar(col = mem_color[-7]), nrow = 3)
 
-draw(lgd, x = unit(2.3, "cm"), y = unit(11.7, "cm"), just = c("left", "top"))
+draw(lgd, x = unit(2.3, "cm"), y = unit(13, "cm"), just = c("left", "top"))
 
-grid.text("Scale on axes", x =  unit(10.2, "cm"), y = unit(11.7, "cm"), just = c("left", "top"), gp = gpar(fontsize = 10, fontface = "bold"))
-grid.segments(unit(10.3, "cm"), unit(11.1, "cm"), unit(12.3, "cm"), unit(11.1, "cm"), gp = gpar(col = "#808080", lty = 1))
-grid.segments(unit(c(10, 11, 12)+0.3, "cm"), unit(11.1, "cm"), unit(c(10, 11, 12)+0.3, "cm"), unit(11.2, "cm"), gp = gpar(col = "#808080", lty = 1))
-grid.text(c(0, 1, 2), unit(c(10, 11, 12)+0.3, "cm"), unit(11, "cm"), gp = gpar(fontsize = 7, col = "#808080"), just = "top")
+grid.text("Scale on axes", x =  unit(10.2, "cm"), y = unit(13, "cm"), just = c("left", "top"), gp = gpar(fontsize = 10, fontface = "bold"))
+grid.segments(unit(10.3, "cm"), unit(12.3, "cm"), unit(12.3, "cm"), unit(12.3, "cm"), gp = gpar(col = "#808080", lty = 1))
+grid.segments(unit(c(10, 11, 12)+0.3, "cm"), unit(12.3, "cm"), unit(c(10, 11, 12)+0.3, "cm"), unit(12.4, "cm"), gp = gpar(col = "#808080", lty = 1))
+grid.text(c(0, 1, 2), unit(c(10, 11, 12)+0.3, "cm"), unit(12, "cm"), gp = gpar(fontsize = 7, col = "#808080"), just = "top")
+
+pushViewport(viewport(x = unit(30.5, "cm"), y = unit(13, "cm"), width = unit(5, "cm"), height = unit(6, "cm"), just = c("left", "top")))
+plot_hc(hclust(dist(tbb2)), ann = FALSE, fontsize = 10)
+popViewport()
 dev.off()
 
 
-tbb = data.frame(
-	slop1 = sapply(lt, function(x) x[1, "slop"]),
-	intercept1 = sapply(lt, function(x) x[1, "intercept"]),
-	balance1 = sapply(lt, function(x) x[1, "balance"]),
-	slop2 = sapply(lt, function(x) x[2, "slop"]),
-	intercept2 = sapply(lt, function(x) x[2, "intercept"]),
-	balance2 = sapply(lt, function(x) x[2, "balance"])
-)
-rownames(tbb) = names(lt)
 
-plot(tbb[, 1], tbb[, 3])
-text(tbb[, 1], tbb[, 3], rownames(tbb))
-abline(h = 1, col = "grey")
-abline(v = 1, col = "grey")
+lt = list()
+for(country in names(mem_name[mem_name != "Africa"])) {
+	foo = grid.grabExpr(lt[[country]] <- do_country(country, country, a2 = 0.5, a1 = 1.2, b1 = 2.5, b2 = 1))
+}
 
-tbb2 = apply(tbb, 2, scale)
-rownames(tbb2) = rownames(tbb)
 
-pdf("figures/figure9.pdf", width = 5, height = 5)
-par(mar = c(1, 4.1, 4, 1))
-plot(hclust(dist(tbb2)), ann = FALSE)
-title(main = "Influence balance in World-1 and World-2", ylab = "Height")
-dev.off()
 
 # # degree distribution
 # lt = split(names(mem_name), mem_name)

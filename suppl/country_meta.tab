@@ -1,0 +1,235 @@
+standardName	place	pop2024	growthRate	area	country	cca3	cca2	ccn3	region	subregion	unMember	officialName	landAreaKm	density	densityMi	borders	Rank
+India	356	1441719852	0.00916	3287590	India	IND	IN	356	Asia	Southern Asia, South Central Asia	true	Republic of India	2973190	484.9067	1255.9084	AFG, BGD, BTN, MMR, CHN, NPL, PAK, LKA	1
+China	156	1425178782	-0.00035	9706961	China	CHN	CN	156	Asia	Eastern Asia	true	People's Republic of China	9424702.9	151.2174	391.653	AFG, BTN, MMR, HKG, IND, KAZ, PRK, KGZ, LAO, MAC, MNG, PAK, RUS, TJK, VNM	2
+United States	840	341814420	0.00535	9372610	United States	USA	US	840	North America	Northern America	true	United States of America	9147420	37.3673	96.7813	CAN, MEX	3
+Indonesia	360	279798049	0.00816	1904569	Indonesia	IDN	ID	360	Asia	South-Eastern Asia	true	Republic of Indonesia	1877519	149.0254	385.9758	TLS, MYS, PNG	4
+Pakistan	586	245209815	0.01964	881912	Pakistan	PAK	PK	586	Asia	Southern Asia, South Central Asia	true	Islamic Republic of Pakistan	770880	318.0908	823.8551	AFG, CHN, IND, IRN	5
+Nigeria	566	229152217	0.02389	923768	Nigeria	NGA	NG	566	Africa	Western Africa, Sub-Saharan Africa	true	Federal Republic of Nigeria	910770	251.6027	651.6511	BEN, CMR, TCD, NER	6
+Brazil	76	217637297	0.00561	8515767	Brazil	BRA	BR	76	South America	South America, Latin America	true	Federative Republic of Brazil	8358140	26.039	67.4409	ARG, BOL, COL, GUF, GUY, PRY, PER, SUR, URY, VEN	7
+Bangladesh	50	174701211	0.0101	147570	Bangladesh	BGD	BD	50	Asia	Southern Asia, South Central Asia	true	People's Republic of Bangladesh	130170	1342.1004	3476.0401	MMR, IND	8
+Russia	643	143957079	-0.00337	17098242	Russia	RUS	RU	643	Europe	Eastern Europe	true	Russian Federation	16376870	8.7903	22.7668	AZE, BLR, CHN, EST, FIN, GEO, KAZ, PRK, LVA, LTU, MNG, NOR, POL, UKR	9
+Ethiopia	231	129719719	0.02523	1104300	Ethiopia	ETH	ET	231	Africa	Eastern Africa, Sub-Saharan Africa	true	Federal Democratic Republic of Ethiopia	1128571.3	114.9415	297.6986	DJI, ERI, KEN, SOM, SSD, SDN	10
+Mexico	484	129388467	0.00726	1964375	Mexico	MEX	MX	484	North America	Central America, Latin America	true	United Mexican States	1943950	66.5596	172.3893	BLZ, GTM, USA	11
+Japan	392	122631432	-0.00538	377930	Japan	JPN	JP	392	Asia	Eastern Asia	true	Japan	364500	336.4374	871.3729		12
+Philippines	608	119106224	0.01508	342353	Philippines	PHL	PH	608	Asia	South-Eastern Asia	true	Republic of the Philippines	298170	399.4574	1034.5948		13
+Egypt	818	114484252	0.01568	1002450	Egypt	EGY	EG	818	Africa	Northern Africa, The Middle East	true	Arab Republic of Egypt	995450	115.0075	297.8695	ISR, LBY, SDN	14
+Republic of the Congo	180	105625114	0.03288	2344858	Republic of the Congo	COD	CD	180	Africa	Middle Africa, Sub-Saharan Africa	true	Democratic Republic of the Congo	2267050	46.5914	120.6718	AGO, BDI, CAF, COG, RWA, SSD, TZA, UGA, ZMB	15
+Vietnam	704	99497680	0.00646	331212	Vietnam	VNM	VN	704	Asia	South-Eastern Asia	true	Socialist Republic of Vietnam	313429	317.4489	822.1926	KHM, CHN, LAO	16
+Iran	364	89809781	0.00714	1648195	Iran	IRN	IR	364	Asia	Southern Asia, The Middle East	true	Islamic Republic of Iran	1622500	55.3527	143.3635	AFG, ARM, AZE, IRQ, PAK, TUR, TKM	17
+Turkey	792	86260417	0.00518	783562	Turkey	TUR	TR	792	Asia	Western Asia, The Middle East	true	Republic of Turkey	783562	110.0875	285.1267	ARM, AZE, BGR, GEO, GRC, IRN, IRQ, SYR	18
+Germany	276	83252474	-0.00051	357114	Germany	DEU	DE	276	Europe	Western Europe	true	Federal Republic of Germany	349390	238.2795	617.1439	AUT, BEL, CZE, DNK, FRA, LUX, NLD, POL, CHE	19
+Thailand	764	71885799	0.00118	513120	Thailand	THA	TH	764	Asia	South-Eastern Asia	true	Kingdom of Thailand	510890	140.707	364.4311	MMR, KHM, LAO, MYS	20
+Tanzania	834	69419073	0.02938	945087	Tanzania	TZA	TZ	834	Africa	Eastern Africa, Sub-Saharan Africa	true	United Republic of Tanzania	885800	78.3688	202.9752	BDI, COD, KEN, MWI, MOZ, RWA, UGA, ZMB	21
+United Kingdom	826	67961439	0.00332	242900	United Kingdom	GBR	GB	826	Europe	Northern Europe	true	United Kingdom of Great Britain and Northern Ireland	241930	280.9136	727.5663	IRL	22
+France	250	64881830	0.00193	551695	France	FRA	FR	250	Europe	Western Europe	true	French Republic	547557	118.4933	306.8976	AND, BEL, DEU, ITA, LUX, MCO, ESP, CHE	23
+South Africa	710	61020221	0.01003	1221037	South Africa	ZAF	ZA	710	Africa	Southern Africa, Sub-Saharan Africa	true	Republic of South Africa	1213090	50.3015	130.2808	BWA, LSO, MOZ, NAM, SWZ, ZWE	24
+Italy	380	58697744	-0.00294	301336	Italy	ITA	IT	380	Europe	Southern Europe	true	Italian Republic	295717	198.493	514.0968	AUT, FRA, SMR, SVN, CHE, VAT	25
+Kenya	404	56203030	0.02001	580367	Kenya	KEN	KE	404	Africa	Eastern Africa, Sub-Saharan Africa	true	Republic of Kenya	569140	98.7508	255.7646	ETH, SOM, SSD, TZA, UGA	26
+Myanmar	104	54964694	0.00709	676578	Myanmar	MMR	MM	104	Asia	South-Eastern Asia	true	Republic of the Union of Myanmar	652670	84.2151	218.1172	BGD, CHN, IND, LAO, THA	27
+Colombia	170	52340774	0.00491	1141748	Colombia	COL	CO	170	South America	South America, Latin America	true	Republic of Colombia	1109500	47.1751	122.1835	BRA, ECU, PAN, PER, VEN	28
+South Korea	410	51741963	-0.00081	100210	South Korea	KOR	KR	410	Asia	Eastern Asia	true	Republic of Korea	97600	530.1431	1373.0705	PRK	29
+Uganda	800	49924252	0.02762	241550	Uganda	UGA	UG	800	Africa	Eastern Africa, Sub-Saharan Africa	true	Republic of Uganda	200520	248.9739	644.8425	COD, KEN, RWA, SSD, TZA	30
+Sudan	729	49358228	0.02597	1886068	Sudan	SDN	SD	729	Africa	Northern Africa	true	Republic of the Sudan	1868000	26.423	68.4357	CAF, TCD, EGY, ERI, ETH, LBY, SSD	31
+Spain	724	47473373	-0.00097	505992	Spain	ESP	ES	724	Europe	Southern Europe	true	Kingdom of Spain	499556.6	95.031	246.1303	AND, FRA, GIB, PRT, MAR	32
+Iraq	368	46523657	0.0224	438317	Iraq	IRQ	IQ	368	Asia	Western Asia, The Middle East	true	Republic of Iraq	434128	107.1658	277.5593	IRN, JOR, KWT, SAU, SYR, TUR	33
+Algeria	12	46278751	0.01474	2381741	Algeria	DZA	DZ	12	Africa	Northern Africa	true	People's Democratic Republic of Algeria	2381741	19.4306	50.3254	TUN, LBY, NER, ESH, MRT, MLI, MAR	34
+Argentina	32	46057866	0.0062	2780400	Argentina	ARG	AR	32	South America	South America, Latin America	true	Argentine Republic	2736690	16.8298	43.5891	BOL, BRA, CHL, PRY, URY	35
+Afghanistan	4	43372950	0.02683	652230	Afghanistan	AFG	AF	4	Asia	South Central Asia, Southern Asia	true	Islamic Republic of Afghanistan	652230	66.4995	172.2336	IRN, PAK, TKM, UZB, TJK, CHN	36
+Poland	616	40221726	-0.01961	312679	Poland	POL	PL	616	Europe	Eastern Europe	true	Republic of Poland	306130	131.3877	340.2942	BLR, CZE, DEU, LTU, RUS, SVK, UKR	37
+Canada	124	39107046	0.0084	9984670	Canada	CAN	CA	124	North America	Northern America	true	Canada	8965590	4.3619	11.2973	USA	38
+Morocco	504	38211459	0.00982	446550	Morocco	MAR	MA	504	Africa	Northern Africa	true	Kingdom of Morocco	446300	85.6183	221.7515	DZA, ESH, ESP	39
+Ukraine	804	37937821	0.03247	603500	Ukraine	UKR	UA	804	Europe	Eastern Europe	true	Ukraine	579400	65.4778	169.5874	BLR, HUN, MDA, POL, ROU, RUS, SVK	40
+Angola	24	37804634	0.03054	1246700	Angola	AGO	AO	24	Africa	Middle Africa, Sub-Saharan Africa	true	Republic of Angola	1246700	30.3238	78.5385	COG, COD, ZMB, NAM	41
+Saudi Arabia	682	37473929	0.01426	2149690	Saudi Arabia	SAU	SA	682	Asia	Western Asia, The Middle East	true	Kingdom of Saudi Arabia	2149690	17.4322	45.1495	IRQ, JOR, KWT, OMN, QAT, ARE, YEM	42
+Uzbekistan	860	35673804	0.0145	447400	Uzbekistan	UZB	UZ	860	Asia	Central Asia, South Central Asia	true	Republic of Uzbekistan	440650	80.9572	209.6792	AFG, KAZ, KGZ, TJK, TKM	43
+Yemen	887	35219853	0.02235	527968	Yemen	YEM	YE	887	Asia	Western Asia, The Middle East	true	Republic of Yemen	527970	66.7081	172.7739	OMN, SAU	44
+Mozambique	508	34858402	0.02835	801590	Mozambique	MOZ	MZ	508	Africa	Eastern Africa, Sub-Saharan Africa	true	Republic of Mozambique	786380	44.3277	114.8087	MWI, ZAF, SWZ, TZA, ZMB, ZWE	45
+Ghana	288	34777522	0.01921	238533	Ghana	GHA	GH	288	Africa	Western Africa, Sub-Saharan Africa	true	Republic of Ghana	227533	152.8461	395.8713	BFA, CIV, TGO	46
+Peru	604	34683444	0.00963	1285216	Peru	PER	PE	604	South America	South America, Latin America	true	Republic of Peru	1280000	27.0964	70.1798	BOL, BRA, CHL, COL, ECU	47
+Malaysia	458	34671895	0.01059	330803	Malaysia	MYS	MY	458	Asia	South-Eastern Asia	true	Malaysia	328550	105.53	273.3228	BRN, IDN, THA	48
+Nepal	524	31240315	0.01113	147181	Nepal	NPL	NP	524	Asia	Southern Asia, South Central Asia	true	Federal Democratic Republic of Nepal	143350	217.9303	564.4396	CHN, IND	49
+Madagascar	450	31056610	0.0241	587041	Madagascar	MDG	MG	450	Africa	Eastern Africa, Sub-Saharan Africa	true	Republic of Madagascar	581800	53.3802	138.2548		50
+Ivory Coast	384	29603302	0.02529	322463	Ivory Coast	CIV	CI	384	Africa	Western Africa, Sub-Saharan Africa	true	Republic of Côte d'Ivoire	318000	93.0921	241.1087	BFA, GHA, GIN, LBR, MLI	51
+Venezuela	862	29395334	0.01931	916445	Venezuela	VEN	VE	862	South America	South America, Latin America	true	Bolivarian Republic of Venezuela	882050	33.3262	86.3147	BRA, COL, GUY	52
+Cameroon	120	29394433	0.02608	475442	Cameroon	CMR	CM	120	Africa	Middle Africa, Sub-Saharan Africa	true	Republic of Cameroon	472710	62.1828	161.0535	CAF, TCD, COG, GNQ, GAB, NGA	53
+Niger	562	28238972	0.03809	1267000	Niger	NER	NE	562	Africa	Western Africa, Sub-Saharan Africa	true	Republic of Niger	1266700	22.2933	57.7397	DZA, BEN, BFA, TCD, LBY, MLI, NGA	54
+Australia	36	26699482	0.00985	7692024	Australia	AUS	AU	36	Oceania	Australia and New Zealand	true	Commonwealth of Australia	7692020	3.4711	8.9901		55
+North Korea	408	26244582	0.0032	120538	North Korea	PRK	KP	408	Asia	Eastern Asia	true	Democratic People's Republic of Korea	120410	217.9602	564.5168	CHN, KOR, RUS	56
+Syria	760	24348053	0.04826	185180	Syria	SYR	SY	760	Asia	Western Asia, The Middle East	true	Syrian Arab Republic	183630	132.593	343.4159	IRQ, ISR, JOR, LBN, TUR	57
+Mali	466	24015789	0.031	1240192	Mali	MLI	ML	466	Africa	Western Africa, Sub-Saharan Africa	true	Republic of Mali	1220190	19.682	50.9764	DZA, BFA, GIN, CIV, MRT, NER, SEN	58
+Taiwan	158	23950214	0.00113	36193	Taiwan	TWN	TW	158	Asia	Eastern Asia	false	Republic of China	36197	661.663	1713.7071		59
+Burkina Faso	854	23840247	0.02532	272967	Burkina Faso	BFA	BF	854	Africa	Western Africa, Sub-Saharan Africa	true	Burkina Faso	273600	87.1354	225.6807	BEN, CIV, GHA, MLI, NER, TGO	60
+Sri Lanka	144	21949268	0.00254	65610	Sri Lanka	LKA	LK	144	Asia	Southern Asia, South Central Asia	true	Democratic Socialist Republic of Sri Lanka	61860	354.8217	918.9881	IND	61
+Malawi	454	21475962	0.026	118484	Malawi	MWI	MW	454	Africa	Eastern Africa, Sub-Saharan Africa	true	Republic of Malawi	94280	227.7892	589.9739	MOZ, TZA, ZMB	62
+Zambia	894	21134695	0.02747	752612	Zambia	ZMB	ZM	894	Africa	Eastern Africa, Sub-Saharan Africa	true	Republic of Zambia	743390	28.4302	73.6341	AGO, BWA, COD, MWI, MOZ, NAM, TZA, ZWE	63
+Kazakhstan	398	19828165	0.0113	2724900	Kazakhstan	KAZ	KZ	398	Asia	Central Asia	true	Republic of Kazakhstan	2699700	7.3446	19.0225	CHN, KGZ, RUS, TKM, UZB	64
+Chile	152	19658839	0.00149	756102	Chile	CHL	CL	152	South America	South America, Latin America	true	Republic of Chile	743532	26.4398	68.4791	ARG, BOL, PER	65
+Romania	642	19618996	-0.01377	238391	Romania	ROU	RO	642	Europe	Eastern Europe	true	Romania	230080	85.2703	220.8501	BGR, HUN, MDA, SRB, UKR	66
+Chad	148	18847148	0.03111	1284000	Chad	TCD	TD	148	Africa	Middle Africa, Sub-Saharan Africa	true	Republic of Chad	1259200	14.9676	38.766	CMR, CAF, LBY, NER, NGA, SSD	67
+Somalia	706	18706922	0.03106	637657	Somalia	SOM	SO	706	Africa	Eastern Africa, Sub-Saharan Africa	true	Federal Republic of Somalia	627340	29.8194	77.2323	DJI, ETH, KEN	68
+Ecuador	218	18377367	0.01027	276841	Ecuador	ECU	EC	218	South America	South America, Latin America	true	Republic of Ecuador	248360	73.9949	191.6467	COL, PER	69
+Guatemala	320	18358430	0.01473	108889	Guatemala	GTM	GT	320	North America	Central America, Latin America	true	Republic of Guatemala	107160	171.3179	443.7135	BLZ, SLV, HND, MEX	70
+Senegal	686	18221567	0.02581	196722	Senegal	SEN	SN	686	Africa	Western Africa, Sub-Saharan Africa	true	Republic of Senegal	192530	94.6427	245.1247	GMB, GIN, GNB, MLI, MRT	71
+Netherlands	528	17671125	0.003	41850	Netherlands	NLD	NL	528	Europe	Western Europe	true	Netherlands	33670	524.8329	1359.3173	BEL, DEU	72
+Cambodia	116	17121847	0.01045	181035	Cambodia	KHM	KH	116	Asia	South-Eastern Asia	true	Kingdom of Cambodia	176520	96.9966	251.2213	LAO, THA, VNM	73
+Zimbabwe	716	17020321	0.0213	390757	Zimbabwe	ZWE	ZW	716	Africa	Eastern Africa, Sub-Saharan Africa	true	Republic of Zimbabwe	386850	43.9972	113.9528	BWA, MOZ, ZAF, ZMB	74
+Guinea	324	14528770	0.02383	245857	Guinea	GIN	GN	324	Africa	Western Africa, Sub-Saharan Africa	true	Republic of Guinea	245720	59.1273	153.1398	CIV, GNB, LBR, MLI, SEN, SLE	75
+Rwanda	646	14414910	0.02272	26338	Rwanda	RWA	RW	646	Africa	Eastern Africa, Sub-Saharan Africa	true	Republic of Rwanda	24670	584.3093	1513.361	BDI, COD, TZA, UGA	76
+Benin	204	14080072	0.02678	112622	Benin	BEN	BJ	204	Africa	Western Africa, Sub-Saharan Africa	true	Republic of Benin	112760	124.8676	323.4071	BFA, NER, NGA, TGO	77
+Burundi	108	13591657	0.02667	27834	Burundi	BDI	BI	108	Africa	Eastern Africa, Sub-Saharan Africa	true	Republic of Burundi	25680	529.2701	1370.8096	COD, RWA, TZA	78
+Bolivia	68	12567336	0.01443	1098581	Bolivia	BOL	BO	68	South America	South America, Latin America	true	Plurinational State of Bolivia	1083300	11.601	30.0465	ARG, BRA, CHL, PRY, PER	79
+Tunisia	788	12564689	0.00855	163610	Tunisia	TUN	TN	788	Africa	Northern Africa	true	Tunisian Republic	155360	80.8747	209.4654	DZA, LBY	80
+Haiti	332	11867030	0.01213	27750	Haiti	HTI	HT	332	North America	Caribbean	true	Republic of Haiti	27560	430.5889	1115.2252	DOM	81
+Belgium	56	11715774	0.00254	30528	Belgium	BEL	BE	56	Europe	Western Europe	true	Kingdom of Belgium	30280	386.9146	1002.1088	FRA, DEU, LUX, NLD	82
+Dominican Republic	214	11434005	0.00892	48671	Dominican Republic	DOM	DO	214	North America	Caribbean	true	Dominican Republic	48310	236.6799	613.0009	HTI	83
+Jordan	400	11384922	0.00422	89342	Jordan	JOR	JO	400	Asia	Western Asia, The Middle East	true	Hashemite Kingdom of Jordan	88794	128.2172	332.0827	IRQ, ISR, SAU, SYR	84
+South Sudan	728	11277092	0.01698	619745	South Sudan	SSD	SS	728	Africa	Middle Africa, Sub-Saharan Africa	true	Republic of South Sudan	631930	17.8455	46.2198	CAF, COD, ETH, KEN, SDN, UGA	85
+Cuba	192	11174587	-0.00177	109884	Cuba	CUB	CU	192	North America	Caribbean	true	Republic of Cuba	103800	107.655	278.8264		86
+Honduras	340	10759406	0.01563	112492	Honduras	HND	HN	340	North America	Central America, Latin America	true	Republic of Honduras	111890	96.1606	249.0559	GTM, SLV, NIC	87
+Sweden	752	10673669	0.0058	450295	Sweden	SWE	SE	752	Europe	Northern Europe	true	Kingdom of Sweden	407283.5	26.207	67.8761	FIN, NOR	88
+Papua New Guinea	598	10515788	0.01799	462840	Papua New Guinea	PNG	PG	598	Oceania	Melanesia	true	Independent State of Papua New Guinea	452860	23.2208	60.142	IDN	89
+Czech Republic	203	10503734	0.0008	78865	Czech Republic	CZE	CZ	203	Europe	Eastern Europe	true	Czech Republic	77198.5	136.0614	352.399	AUT, DEU, POL, SVK	90
+Azerbaijan	31	10462904	0.00483	86600	Azerbaijan	AZE	AZ	31	Asia	Western Asia	true	Republic of Azerbaijan	82646	126.599	327.8915	ARM, GEO, IRN, RUS, TUR	91
+Tajikistan	762	10331513	0.01853	143100	Tajikistan	TJK	TJ	762	Asia	Central Asia, South Central Asia	true	Republic of Tajikistan	138790	74.4399	192.7993	AFG, CHN, KGZ, UZB	92
+Greece	300	10302720	-0.00373	131990	Greece	GRC	GR	300	Europe	Southern Europe	true	Hellenic Republic	128900	79.928	207.0135	ALB, BGR, TUR, MKD	93
+Portugal	620	10223349	-0.00237	92090	Portugal	PRT	PT	620	Europe	Southern Europe	true	Portuguese Republic	91605.6	111.6018	289.0486	ESP	94
+Hungary	348	9994993	-0.01588	93028	Hungary	HUN	HU	348	Europe	Eastern Europe	true	Hungary	91260	109.5222	283.6624	AUT, HRV, ROU, SRB, SVK, SVN, UKR	95
+United Arab Emirates	784	9591853	0.00788	83600	United Arab Emirates	ARE	AE	784	Asia	Western Asia, The Middle East	true	United Arab Emirates	71020	135.0585	349.8015	OMN, SAU	96
+Belarus	112	9455037	-0.00455	207600	Belarus	BLR	BY	112	Europe	Eastern Europe	true	Republic of Belarus	202980	46.5811	120.6451	LVA, LTU, POL, RUS, UKR	97
+Israel	376	9311652	0.01495	20770	Israel	ISR	IL	376	Asia	Western Asia, The Middle East	true	State of Israel	21640	430.2982	1114.4722	EGY, JOR, LBN, SYR	98
+Togo	768	9260864	0.02287	56785	Togo	TGO	TG	768	Africa	Western Africa, Sub-Saharan Africa	true	Togolese Republic	54390	170.2678	440.9935	BEN, BFA, GHA	99
+Sierra Leone	694	8977972	0.02126	71740	Sierra Leone	SLE	SL	694	Africa	Western Africa, Sub-Saharan Africa	true	Republic of Sierra Leone	72180	124.3831	322.1522	GIN, LBR	100
+Austria	40	8977139	0.00203	83871	Austria	AUT	AT	40	Europe	Western Europe	true	Republic of Austria	82520	108.7874	281.7595	CZE, DEU, HUN, ITA, LIE, SVK, SVN, CHE	101
+Switzerland	756	8851431	0.00623	41284	Switzerland	CHE	CH	756	Europe	Western Europe	true	Swiss Confederation	39516	223.9961	580.15	AUT, FRA, ITA, LIE, DEU	102
+Laos	418	7736681	0.01348	236800	Laos	LAO	LA	418	Asia	South-Eastern Asia	true	Lao People's Democratic Republic	230800	33.5211	86.8198	MMR, KHM, CHN, THA, VNM	103
+Hong Kong	344	7496681	0.00068	1104	Hong Kong	HKG	HK	344	Asia	Eastern Asia	false	Hong Kong Special Administrative Region of the People's Republic of China	1050	7139.6962	18491.8131	CHN	104
+Nicaragua	558	7142529	0.01366	130373	Nicaragua	NIC	NI	558	North America	Central America, Latin America	true	Republic of Nicaragua	120340	59.3529	153.724	CRI, HND	105
+Serbia	688	7097028	-0.00728	88361	Serbia	SRB	RS	688	Europe	Southern Europe	true	Republic of Serbia	87460	81.146	210.1681	BIH, BGR, HRV, HUN, KOS, MKD, MNE, ROU	106
+Libya	434	6964197	0.01101	1759540	Libya	LBY	LY	434	Africa	Northern Africa	true	State of Libya	1759540	3.958	10.2511	DZA, TCD, EGY, NER, SDN, TUN	107
+Paraguay	600	6947270	0.0125	406752	Paraguay	PRY	PY	600	South America	South America, Latin America	true	Republic of Paraguay	397300	17.4862	45.2893	ARG, BOL, BRA	108
+Kyrgyzstan	417	6839606	0.01548	199951	Kyrgyzstan	KGZ	KG	417	Asia	Central Asia, South Central Asia	true	Kyrgyz Republic	191800	35.6601	92.3596	CHN, KAZ, TJK, UZB	109
+Bulgaria	100	6618615	-0.01033	110879	Bulgaria	BGR	BG	100	Europe	Eastern Europe	true	Republic of Bulgaria	108560	60.9673	157.9054	GRC, MKD, ROU, SRB, TUR	110
+Turkmenistan	795	6598071	0.01258	488100	Turkmenistan	TKM	TM	795	Asia	Central Asia, South Central Asia	true	Turkmenistan	469930	14.0405	36.365	AFG, IRN, KAZ, UZB	111
+El Salvador	222	6396289	0.00493	21041	El Salvador	SLV	SV	222	North America	Central America, Latin America	true	Republic of El Salvador	20720	308.7012	799.5361	GTM, HND	112
+Republic of the Congo	178	6244547	0.02255	342000	Republic of the Congo	COG	CG	178	Africa	Middle Africa, Sub-Saharan Africa	true	Republic of the Congo	341500	18.2856	47.3598	AGO, CMR, CAF, COD, GAB	113
+Singapore	702	6052709	0.00632	710	Singapore	SGP	SG	702	Asia	South-Eastern Asia	true	Republic of Singapore	718	8429.9568	21833.5882		114
+Denmark	208	5939695	0.00487	43094	Denmark	DNK	DK	208	Europe	Northern Europe	true	Kingdom of Denmark	40000	148.4924	384.5953	DEU	115
+Central African Republic	140	5915627	0.03018	622984	Central African Republic	CAF	CF	140	Africa	Middle Africa, Sub-Saharan Africa	true	Central African Republic	622980	9.4957	24.5938	CMR, TCD, COD, COG, SSD, SDN	116
+Slovakia	703	5702832	-0.01594	49037	Slovakia	SVK	SK	703	Europe	Eastern Europe	true	Slovak Republic	49035	116.3013	301.2202	AUT, CZE, HUN, POL, UKR	117
+Finland	246	5549886	0.0008	338424	Finland	FIN	FI	246	Europe	Northern Europe	true	Republic of Finland	303940	18.2598	47.2929	NOR, SWE, RUS	118
+Liberia	430	5536949	0.02188	111369	Liberia	LBR	LR	430	Africa	Western Africa, Sub-Saharan Africa	true	Republic of Liberia	96320	57.4849	148.886	GIN, CIV, SLE	119
+Norway	578	5514477	0.00733	323802	Norway	NOR	NO	578	Europe	Northern Europe	true	Kingdom of Norway	364285	15.1378	39.2069	FIN, SWE, RUS	120
+Palestine	275	5494963	0.02304	6220	Palestine	PSE	PS	275	Asia	Western Asia, The Middle East	true	State of Palestine	6020	912.7846	2364.112	ISR, EGY, JOR	121
+New Zealand	554	5269939	0.008	270467	New Zealand	NZL	NZ	554	Oceania	Australia and New Zealand	true	New Zealand	263310	20.0142	51.8368		122
+Costa Rica	188	5246714	0.00663	51100	Costa Rica	CRI	CR	188	North America	Central America, Latin America	true	Republic of Costa Rica	51060	102.7559	266.1377	NIC, PAN	123
+Lebanon	422	5219044	-0.02519	10452	Lebanon	LBN	LB	422	Asia	Western Asia, The Middle East	true	Lebanese Republic	10230	510.1705	1321.3415	ISR, SYR	124
+Ireland	372	5089478	0.00644	70273	Ireland	IRL	IE	372	Europe	Northern Europe	true	Ireland	68890	73.8783	191.3449	GBR	125
+Mauritania	478	4993922	0.02692	1030700	Mauritania	MRT	MR	478	Africa	Western Africa, Sub-Saharan Africa	true	Islamic Republic of Mauritania	1030700	4.8452	12.549	DZA, MLI, SEN, ESH	126
+Oman	512	4713553	0.01489	309500	Oman	OMN	OM	512	Asia	Western Asia, The Middle East	true	Sultanate of Oman	309500	15.2296	39.4446	SAU, ARE, YEM	127
+Panama	591	4527961	0.0134	75417	Panama	PAN	PA	591	North America	Central America, Latin America	true	Republic of Panama	74180	61.0402	158.0941	COL, CRI	128
+Kuwait	414	4349380	0.00911	17818	Kuwait	KWT	KW	414	Asia	Western Asia, The Middle East	true	State of Kuwait	17820	244.073	632.1489	IRQ, SAU	129
+Croatia	191	3986627	-0.00549	56594	Croatia	HRV	HR	191	Europe	Southern Europe	true	Republic of Croatia	55960	71.2407	184.5133	BIH, HUN, MNE, SRB, SVN	130
+Eritrea	232	3817651	0.01834	117600	Eritrea	ERI	ER	232	Africa	Eastern Africa, Sub-Saharan Africa	true	State of Eritrea	121040.8	31.5402	81.6891	DJI, ETH, SDN	131
+	268	3717425	-0.00291	69700	Georgia	GEO	GE	268	Asia	Western Asia	true	Georgia	69490	53.4958	138.5542	ARM, AZE, RUS, TUR	132
+Mongolia	496	3493629	0.01348	1564110	Mongolia	MNG	MN	496	Asia	Eastern Asia	true	Mongolia	1557506.8	2.2431	5.8096	CHN, RUS	133
+Uruguay	858	3423316	0.00006	181034	Uruguay	URY	UY	858	South America	South America, Latin America	true	Oriental Republic of Uruguay	175020	19.5596	50.6593	ARG, BRA	134
+Moldova	498	3329865	-0.03087	33846	Moldova	MDA	MD	498	Europe	Eastern Europe	true	Republic of Moldova	32884.6	101.2591	262.2611	ROU, UKR	135
+Puerto Rico	630	3268802	0.0026	8870	Puerto Rico	PRI	PR	630	North America	Caribbean	false	Commonwealth of Puerto Rico	8870	368.5233	954.4754		136
+Bosnia and Herzegovina	70	3194378	-0.00513	51209	Bosnia and Herzegovina	BIH	BA	70	Europe	Southern Europe	true	Bosnia and Herzegovina	51200	62.3902	161.5906	HRV, MNE, SRB	137
+Gambia	270	2841803	0.02475	10689	Gambia	GMB	GM	270	Africa	Western Africa, Sub-Saharan Africa	true	Republic of the Gambia	10120	280.8106	727.2994	SEN	138
+Albania	8	2826020	-0.00227	28748	Albania	ALB	AL	8	Europe	Southern Europe	true	Republic of Albania	27400	103.1394	267.1311	MNE, GRC, MKD, KOS	139
+Jamaica	388	2824738	-0.00029	10991	Jamaica	JAM	JM	388	North America	Caribbean	true	Jamaica	10830	260.8253	675.5375		140
+Armenia	51	2777979	0	29743	Armenia	ARM	AM	51	Asia	Western Asia	true	Republic of Armenia	28470	97.5757	252.721	AZE, GEO, IRN, TUR	141
+Qatar	634	2737061	0.00761	11586	Qatar	QAT	QA	634	Asia	Western Asia, The Middle East	true	State of Qatar	11490	238.2124	616.9702	SAU	142
+Botswana	72	2719694	0.01657	582000	Botswana	BWA	BW	72	Africa	Southern Africa, Sub-Saharan Africa	true	Republic of Botswana	566730	4.7989	12.4292	NAM, ZAF, ZMB, ZWE	143
+Lithuania	440	2692798	-0.0094	65300	Lithuania	LTU	LT	440	Europe	Northern Europe	true	Republic of Lithuania	62620	43.0022	111.3757	BLR, LVA, POL, RUS	144
+Namibia	516	2645805	0.01599	825615	Namibia	NAM	NA	516	Africa	Southern Africa, Sub-Saharan Africa	true	Republic of Namibia	823290	3.2137	8.3235	AGO, BWA, ZAF, ZMB	145
+Gabon	266	2484557	0.0197	267668	Gabon	GAB	GA	266	Africa	Middle Africa, Sub-Saharan Africa	true	Gabonese Republic	257670	9.6424	24.9738	CMR, COG, GNQ	146
+Lesotho	426	2356083	0.01106	30355	Lesotho	LSO	LS	426	Africa	Southern Africa, Sub-Saharan Africa	true	Kingdom of Lesotho	30360	77.6048	200.9965	ZAF	147
+Guinea-Bissau	624	2197149	0.02153	36125	Guinea-Bissau	GNB	GW	624	Africa	Western Africa, Sub-Saharan Africa	true	Republic of Guinea-Bissau	28120	78.1347	202.369	GIN, SEN	148
+Slovenia	705	2118965	-0.00034	20273	Slovenia	SVN	SI	705	Europe	Southern Europe	true	Republic of Slovenia	20136.4	105.2306	272.5472	AUT, HRV, ITA, HUN	149
+North Macedonia	807	2082706.0000000002	-0.00143	25713	North Macedonia	MKD	MK	807	Europe	Southern Europe	true	Republic of North Macedonia	25220	82.5815	213.8861	ALB, BGR, GRC, KOS, SRB	150
+Latvia	428	1810240	-0.01091	64559	Latvia	LVA	LV	428	Europe	Northern Europe	true	Republic of Latvia	62230	29.0895	75.3418	BLR, EST, LTU, RUS	151
+Equatorial Guinea	226	1754993	0.02352	28051	Equatorial Guinea	GNQ	GQ	226	Africa	Middle Africa, Sub-Saharan Africa	true	Republic of Equatorial Guinea	28050	62.5666	162.0475	CMR, GAB	152
+Trinidad and Tobago	780	1538200	0.00213	5130	Trinidad and Tobago	TTO	TT	780	North America	Caribbean	true	Republic of Trinidad and Tobago	5130	299.8441	776.5961		153
+Bahrain	48	1498712	0.00889	765	Bahrain	BHR	BH	48	Asia	Western Asia, The Middle East	true	Kingdom of Bahrain	785	1909.1873	4944.795		154
+Timor-Leste	626	1379883	0.01418	14874	Timor-Leste	TLS	TL	626	Asia	South-Eastern Asia	true	Democratic Republic of Timor-Leste	14870	92.7964	240.3428	IDN	155
+Estonia	233	1319041	-0.00282	45227	Estonia	EST	EE	233	Europe	Northern Europe	true	Republic of Estonia	42750	30.8548	79.9138	LVA, RUS	156
+Mauritius	480	1301978	0.00109	2040	Mauritius	MUS	MU	480	Africa	Eastern Africa, Sub-Saharan Africa	true	Republic of Mauritius	2030	641.3685	1661.1443		157
+Cyprus	196	1268467	0.00661	9251	Cyprus	CYP	CY	196	Europe	Eastern Europe, The Middle East	true	Republic of Cyprus	9240	137.28	355.5551	GBR	158
+Eswatini	748	1222075	0.00929	17364	Eswatini	SWZ	SZ	748	Africa	Southern Africa, Sub-Saharan Africa	true	Kingdom of Eswatini	17200	71.0509	184.0218	MOZ, ZAF	159
+Djibouti	262	1152329	0.01397	23200	Djibouti	DJI	DJ	262	Africa	Eastern Africa, Sub-Saharan Africa	true	Republic of Djibouti	23180	49.7122	128.7546	ERI, ETH, SOM	160
+Reunion	638	989350	0.00769	2511	Reunion	REU	RE	638	Africa	Eastern Africa, Sub-Saharan Africa	false	Réunion Island	2512	393.8495	1020.0703		161
+Fiji	242	943072	0.00715	18272	Fiji	FJI	FJ	242	Oceania	Melanesia	true	Republic of Fiji	18270	51.6186	133.6922		162
+Comoros	174	867605	0.01823	1862	Comoros	COM	KM	174	Africa	Eastern Africa, Sub-Saharan Africa	true	Union of the Comoros	1861	466.2037	1207.4675		163
+Guyana	328	819594	0.00708	214969	Guyana	GUY	GY	328	South America	South America, Latin America	true	Co-operative Republic of Guyana	196850	4.1635	10.7836	BRA, SUR, VEN	164
+Bhutan	64	792382	0.0063	38394	Bhutan	BTN	BT	64	Asia	Southern Asia, South Central Asia	true	Kingdom of Bhutan	38140	20.7756	53.8088	CHN, IND	165
+Solomon Islands	90	756673	0.02195	28896	Solomon Islands	SLB	SB	90	Oceania	Melanesia	true	Solomon Islands	27990	27.0337	70.0173		166
+Macau	446	713082	0.01269	32.9	Macau	MAC	MO	446	Asia	Eastern Asia	false	Macao Special Administrative Region of the People's Republic of China	32.9	21674.2249	56136.2426	CHN	167
+Luxembourg	442	661594	0.01043	2586	Luxembourg	LUX	LU	442	Europe	Western Europe	true	Grand Duchy of Luxembourg	2574.5	256.9796	665.5772	BEL, FRA, DEU	168
+Suriname	740	628785	0.0089	163820	Suriname	SUR	SR	740	South America	South America, Latin America	true	Republic of Suriname	156000	4.0307	10.4394	BRA, GUF, GUY	169
+Montenegro	499	626102	-0.00061	13812	Montenegro	MNE	ME	499	Europe	Southern Europe	true	Montenegro	13450	46.5503	120.5654	ALB, BIH, HRV, KOS, SRB	170
+Cape Verde	132	604461	0.00965	4033	Cape Verde	CPV	CV	132	Africa	Western Africa, Sub-Saharan Africa	true	Republic of Cabo Verde	4033	149.8788	388.186		171
+Western Sahara	732	598385	0.01895	266000	Western Sahara	ESH	EH	732	Africa	Northern Africa	false	Sahrawi Arab Democratic Republic	266000	2.2496	5.8264	DZA, MRT, MAR	172
+Malta	470	536740	0.00313	316	Malta	MLT	MT	470	Europe	Southern Europe	true	Republic of Malta	320	1677.3125	4344.2394		173
+Maldives	462	517886.99999999994	-0.00602	300	Maldives	MDV	MV	462	Asia	Southern Asia, South Central Asia	true	Republic of the Maldives	300	1726.29	4471.0911		174
+Brunei	96	455858	0.00737	5765	Brunei	BRN	BN	96	Asia	South-Eastern Asia	true	Nation of Brunei, Abode of Peace	5270	86.5006	224.0365	MYS	175
+Belize	84	416656	0.01419	22966	Belize	BLZ	BZ	84	North America	Central America, Latin America	true	Belize	22810	18.2664	47.3099	GTM, MEX	176
+Bahamas	44	415223	0.0063	13943	Bahamas	BHS	BS	44	North America	Caribbean	true	Commonwealth of the Bahamas	10010	41.4808	107.4353		177
+Guadeloupe	312	396346	0.00128	1628	Guadeloupe	GLP	GP	312	North America	Caribbean, Latin America	false	Guadeloupe	1628	243.4558	630.5505		178
+Iceland	352	377689	0.00632	103000	Iceland	ISL	IS	352	Europe	Northern Europe	true	Iceland	100830	3.7458	9.7016		179
+Martinique	474	366416	-0.00154	1128	Martinique	MTQ	MQ	474	North America	Caribbean, Latin America	false	Martinique	1128	324.8369	841.3275		180
+Mayotte	175	345996	0.02977	374	Mayotte	MYT	YT	175	Africa	Eastern Africa, Sub-Saharan Africa	false	Department of Mayotte	374	925.123	2396.0686		181
+Vanuatu	548	342325	0.02338	12189	Vanuatu	VUT	VU	548	Oceania	Melanesia	true	Republic of Vanuatu	12190	28.0824	72.7335		182
+French Guiana	254	319796	0.02448	83534	French Guiana	GUF	GF	254	South America	South America, Latin America	false	Guiana	83534	3.8283	9.9154	BRA, SUR	183
+French Polynesia	258	311383	0.00813	4167	French Polynesia	PYF	PF	258	Oceania	Polynesia	false	French Polynesia	3471	89.7099	232.3486		184
+New Caledonia	540	295966	0.01015	18575	New Caledonia	NCL	NC	540	Oceania	Melanesia	false	New Caledonia	18280	16.1907	41.9339		185
+Barbados	52	282309	0.00111	430	Barbados	BRB	BB	52	North America	Caribbean	true	Barbados	430	656.5326	1700.4193		186
+Sao Tome and Principe	678	236381	0.01952	964	Sao Tome and Principe	STP	ST	678	Africa	Middle Africa, Sub-Saharan Africa	true	Democratic Republic of São Tomé and Príncipe	960	246.2302	637.7362		187
+Samoa	882	228966	0.01456	2842	Samoa	WSM	WS	882	Oceania	Polynesia	true	Independent State of Samoa	2780	82.3619	213.3172		188
+Curacao	531	192965	0.00462	444	Curacao	CUW	CW	531	North America	Caribbean	false	Country of Curaçao	444	434.6059	1125.6292		189
+Saint Lucia	662	180805	0.00307	616	Saint Lucia	LCA	LC	662	North America	Caribbean	true	Saint Lucia	610	296.4016	767.6802		190
+Guam	316	174114	0.00672	549	Guam	GUM	GU	316	Oceania	Micronesia	false	Guam	540	322.4333	835.1023		191
+Kiribati	296	135763	0.01684	811	Kiribati	KIR	KI	296	Oceania	Micronesia	true	Independent and Sovereign Republic of Kiribati	810	167.6086	434.1064		192
+Grenada	308	126887	0.00558	344	Grenada	GRD	GD	308	North America	Caribbean	true	Grenada	340	373.1971	966.5804		193
+Micronesia	583	116300	0.00934	702	Micronesia	FSM	FM	583	Oceania	Micronesia	true	Federated States of Micronesia	700	166.1429	430.31		194
+	832	112843	0.00931	116	Jersey	JEY	JE	832	Europe	Northern Europe, Sub-Saharan Africa	false	Bailiwick of Jersey	120	940.3583	2435.5281		195
+Tonga	776	108683	0.00844	747	Tonga	TON	TO	776	Oceania	Polynesia	true	Kingdom of Tonga	720	150.9486	390.9569		196
+Seychelles	690	108263	0.0056	452	Seychelles	SYC	SC	690	Africa	Eastern Africa, Sub-Saharan Africa	true	Republic of Seychelles	460	235.3543	609.5678		197
+Aruba	533	106177	-0.00094	180	Aruba	ABW	AW	533	North America	Caribbean	false	Aruba	180	589.8722	1527.7691		198
+Saint Vincent and the Grenadines	670	103683	-0.00015	389	Saint Vincent and the Grenadines	VCT	VC	670	North America	Caribbean	true	Saint Vincent and the Grenadines	390	265.8538	688.5615		199
+US Virgin Islands	850	98055	-0.00704	347	US Virgin Islands	VIR	VI	850	North America	Caribbean	false	Virgin Islands of the United States	347	282.5793	731.8803		200
+Antigua and Barbuda	28	94816	0.00549	442	Antigua and Barbuda	ATG	AG	28	North America	Caribbean	true	Antigua and Barbuda	440	215.4909	558.1215		201
+Isle of Man	833	84904	0.00229	572	Isle of Man	IMN	IM	833	Europe	Northern Europe	false	Isle of Man	570	148.9544	385.7919		202
+Andorra	20	80341	0.00316	468	Andorra	AND	AD	20	Europe	Southern Europe	true	Principality of Andorra	470	170.9383	442.7302	FRA, ESP	203
+Dominica	212	73368	0.00449	751	Dominica	DMA	DM	212	North America	Caribbean	true	Commonwealth of Dominica	750	97.824	253.3642		204
+Cayman Islands	136	69885	0.0083	264	Cayman Islands	CYM	KY	136	North America	Caribbean	false	Cayman Islands	240	291.1875	754.1756		205
+Bermuda	60	63935	-0.00209	54	Bermuda	BMU	BM	60	North America	Northern America	false	Bermuda	54	1183.9815	3066.512		206
+Guernsey	831	63788	0.00384	78	Guernsey	GGY	GG	831	Europe	Northern Europe	false	Bailiwick of Guernsey	63	1012.5079	2622.3956		207
+Greenland	304	56789	0.00258	2166086	Greenland	GRL	GL	304	North America	Northern America	false	Greenland	410450	0.1384	0.3583		208
+Faroe Islands	234	53444	0.00327	1393	Faroe Islands	FRO	FO	234	Europe	Northern Europe	false	Faroe Islands	1366	39.1245	101.3323		209
+Northern Mariana Islands	580	50025	0.0046	464	Northern Mariana Islands	MNP	MP	580	Oceania	Micronesia	false	Commonwealth of the Northern Mariana Islands	460	108.75	281.6625		210
+Saint Kitts and Nevis	659	47847	0.00193	261	Saint Kitts and Nevis	KNA	KN	659	North America	Caribbean	true	Federation of Saint Christopher and Nevisa	260	184.0269	476.6297		211
+Turks and Caicos Islands	796	46431	0.00801	948	Turks and Caicos Islands	TCA	TC	796	North America	Caribbean	false	Turks and Caicos Islands	948	48.9778	126.8526		212
+Sint Maarten	534	44309	0.00197	34	Sint Maarten	SXM	SX	534	North America	Caribbean	false	Sint Maarten	34	1303.2059	3375.3032	MAF	213
+American Samoa	16	43544	-0.00843	199	American Samoa	ASM	AS	16	Oceania	Polynesia	false	American Samoa	200	217.72	563.8948		214
+Marshall Islands	584	42415	0.00998	181	Marshall Islands	MHL	MH	584	Oceania	Micronesia	true	Republic of the Marshall Islands	180	235.6389	610.3047		215
+Liechtenstein	438	39822	0.00601	160	Liechtenstein	LIE	LI	438	Europe	Western Europe	true	Principality of Liechtenstein	160	248.8875	644.6186	AUT, CHE	216
+Monaco	492	36157	-0.00386	2.02	Monaco	MCO	MC	492	Europe	Western Europe	true	Principality of Monaco	2	18078.5	46823.315	FRA	217
+San Marino	674	33614	-0.00083	61	San Marino	SMR	SM	674	Europe	Southern Europe	true	Most Serene Republic of San Marino	60	560.2333	1451.0043	ITA	218
+Gibraltar	292	32718.000000000004	0.00092	6.8	Gibraltar	GIB	GI	292	Europe	Southern Europe	false	Gibraltar	6.8	4811.4706	12461.7088	ESP	219
+Saint Martin	663	32337.000000000004	0.00811	53	Saint Martin	MAF	MF	663	North America	Caribbean, Latin America	false	Saint Martin	50	646.74	1675.0566	SXM	220
+British Virgin Islands	92	31763	0.00713	151	British Virgin Islands	VGB	VG	92	North America	Caribbean	false	Virgin Islands	150	211.7533	548.4411		221
+Palau	585	18051	-0.00039	459	Palau	PLW	PW	585	Oceania	Micronesia	true	Republic of Palau	460	39.2413	101.635		222
+Cook Islands	184	17072	0.00164	240	Cook Islands	COK	CK	184	Oceania	Polynesia	false	Cook Islands	240	71.1333	184.2353		223
+Anguilla	660	15936	0.00233	91	Anguilla	AIA	AI	660	North America	Caribbean	false	Anguilla	91	175.1209	453.5631		224
+Nauru	520	12884	0.00814	21	Nauru	NRU	NR	520	Oceania	Micronesia	true	Republic of Nauru	20	644.2	1668.478		225
+Tuvalu	798	11478	0.0072	26	Tuvalu	TUV	TV	798	Oceania	Polynesia	true	Tuvalu	30	382.6	990.934		226
+Wallis and Futuna	876	11439	-0.00548	274	Wallis and Futuna	WLF	WF	876	Oceania	Polynesia	false	Territory of the Wallis and Futuna Islands	274	41.7482	108.1278		227
+Saint Barthelemy	652	11019	0.00227	21	Saint Barthelemy	BLM	BL	652	North America	Caribbean, Latin America	false	Collectivity of Saint BarthélemySaint Barthélemy	25	440.76	1141.5684		228
+Saint Pierre and Miquelon	666	5815	-0.00428	242	Saint Pierre and Miquelon	SPM	PM	666	North America	Northern America	false	Saint Pierre and Miquelon	242	24.0289	62.2349		229
+Montserrat	500	4372	-0.00319	102	Montserrat	MSR	MS	500	North America	Caribbean	false	Montserrat	102	42.8627	111.0145		230
+Falkland Islands	238	3803	0.00317	12173	Falkland Islands	FLK	FK	238	South America	South America, Latin America	false	Falkland Islands	12173	0.3124	0.8091		231
+Niue	570	1935	0	261	Niue	NIU	NU	570	Oceania	Polynesia	false	Niue	261	7.4138	19.2017		232
+Tokelau	772	1915	0.01162	12	Tokelau	TKL	TK	772	Oceania	Polynesia	false	Tokelau	10	191.5	495.985		233
+Vatican City	336	526	0.01544	0.44	Vatican City	VAT	VA	336	Europe	Southern Europe	true	Vatican City State	0.44	1195.4545	3096.2273	ITA	234

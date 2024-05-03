@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-In the citation balance analysis, for a fixed country _A_ and a country _B_ from the world country set, 
+In the citation balance analysis, for a fixed country _A_ and a country _B_ from a world country set (i.e. World-1 or World-2), 
 there is a linear relation between the mutual influence:
 
 $$
@@ -29,16 +29,16 @@ $$
 
 where $s_{A-B}$ is the influence from _A_ to _B_, and $s_{B-A}$ is the influence from _B_ to _A_.
 
-We can see when $s_{B-A} = 0$, $\beta = s_{A-B}$. Assume the vitual country with $s_{B-A} = 0$ as $B_0$, then we have the relations:
+We can see when $s_{B-A} = 0$, $\beta = s_{A-B}$. Assume the virtual country with $s_{B-A} = 0$ as $B_0$, then we have the relations:
 
 $$
 \begin{aligned}
 2^{s_{B_0-A}} &=  \frac{k_{B_0-A}N}{m_{B_0-}n_{-A}} = 1 \\
-2^\beta &= \frac{k_{A-B_0}N}{m_{A-}n_{-B_0}} \\
+2^\beta = 2^{s_{A-B_0}} &= \frac{k_{A-B_0}N}{m_{A-}n_{-B_0}} \\
 \end{aligned}
 $$
 
-We merge these two equations to remove $N$, then we have:
+We merge these two equations to cancle $N$, then we have:
 
 $$
 \begin{aligned}
@@ -48,6 +48,8 @@ $$
 \beta &= \log_2 \left( \left. \frac{k_{A-B_0}}{k_{B_0-A}} \middle/\frac{k_{A-B_0, \mathrm{exp}}}{k_{B_0-A, \mathrm{exp}}} \right. \right) \\
 \end{aligned}
 $$
+
+So $\beta$ is the log2 fold enrichment of mutual citation for country $B_0$.
 
 Particularly, when $\alpha \approx 1$, 
 
@@ -59,6 +61,13 @@ $$
 \end{aligned}
 $$
 
-which means, $\beta$ is an intrinsic attribute of _A_, regardless of the country _B_.
+which means, $\beta$ is an intrinsic attribute of _A_, and it has the same value for any country _B_.
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 

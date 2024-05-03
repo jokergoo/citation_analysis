@@ -1,5 +1,5 @@
 ---
-title: "Domestic citation analysis"
+title: "The linear fit of domestic citations"
 author: "Zuguang Gu ( z.gu@dkfz.de )"
 date: '`r Sys.Date()`'
 output: 
@@ -37,7 +37,7 @@ We will use the following columns:
 - `log2_fc`: The enrichment score.
 
 
-Emperically, $k_{A-A}$ has linear relations to $n_{-A}$ and $m_{A-}$, and it can be demonstrated by the following
+Empirically, $k_{A-A}$ has linear relations to $n_{-A}$ and $m_{A-}$, and it can be demonstrated by the following
 two scatter plots (each data point corresponds to one country):
 
 $$
@@ -54,7 +54,7 @@ plot(df2$citations, df2$total_citing, log = "xy", xlab = "# Domestic citations",
 plot(df2$citations, df2$total_cited,  log = "xy", xlab = "# Domestic citations", ylab = "# Citations A is cited")
 ```
 
-We can fit linear regression models on the log2-scale:
+We fit linear regression models on the log2-scale:
 
 ```{r}
 summary(lm(log2(df2$total_citing) ~ log2(df2$citations)))
@@ -105,7 +105,7 @@ $$
 k^{a_1 + a_2} \cdot 2^{b_1 + b_2} = k_\mathrm{exp}N
 $$
 
-Since all the countries share the same coeffcients from the linear fit, we can simply treat different countries
+Since all the countries share the same coefficients from the linear fit, we can simply treat different countries
 correspond to different stages of the citation network expansion, where small countries correspond to early states.
 Then for two countries with $k_2 > k_1$ and $k_{\mathrm{exp},2} > k_{\mathrm{exp},1}$, we divide the previous equation on both sides:
 
@@ -118,13 +118,15 @@ a_1 + a_2 &= \frac{\log(k_{\mathrm{exp},2}/k_{\mathrm{exp},1})}{\log(k_2/k_1)} \
 $$
 
 Denote $T_{A-A}$, $T_{A-}$ and $T_{-A}$ as the citation networks constructed by the citation relations in the three groups (A-domestic, A-citing
-and A-cited). Let's assume from country 1 to 2, $T_{A-}$ and $T_{-A}$ both expands by a factor of $\alpha$ ($\alpha > 1$), i.e. $m_2 = \alpha \cdot m_1$ and $n_2 = \alpha \cdot n_1$. Then the expansion rate of the citation network if there is no enrichment is
+and A-cited). Let's assume from country 1 to 2, the two background networks $T_{A-}$ and $T_{-A}$ both expand by a factor of $\alpha$ ($\alpha > 1$), i.e., $m_2 = \alpha \cdot m_1$ and $n_2 = \alpha \cdot n_1$. Then the expansion rate of the citation network if there is no enrichment is
 
 $$
 \frac{k_{\mathrm{exp},2}}{k_{\mathrm{exp},1}} = \frac{m_2n_2/N}{m_1n_2/N} = \alpha^2
 $$
 
-Next we look at the expansion rate of $k_2/k_1$. If there is an over-representation, $k$ can be decomposed to
+which is quadratic.
+
+Next we look at the expansion rate of $k_2/k_1$ (the difference of $k$ to the expected $k_\mathrm{exp}$. If there is an over-representation, $k$ can be decomposed to
 
 $k = k_\mathrm{exp} + k_\mathrm{diff}$
 
@@ -141,7 +143,7 @@ plot(df2$total_cited, diff/df2$total_cited, log = "x", xlab = "# Citations A is 
 plot(df2$total_citing, diff/df2$total_citing, log = "x", xlab = "# Citations A cites (n)", ylab = "diff/n")
 ```
 
-We can see, in both plots, there is a positive linear relations in the log-scale. Let's fit the two linear models.
+We can see, in both plots, there are positive linear relations in the log-scale. Let's fit the two linear models.
 Note China (index = 11) and United States (index = 80) are removed from the fitting because they are outliers on the scatter plots.
 
 ```{r}
@@ -157,7 +159,7 @@ summary(lm(p2[-c(11, 80)] ~ log(df2$total_cited[-c(11, 80)])))
 Both slope and intercept coeffcients are very small. To reduce the complexity of the followig equations, we assume $m = n$. 
 We discuss the following two scenarios.
 
-**Scenario 1**: there is a weak positive relations between $p$ and $m$ on the log-scale, thus on the normal scale, we can approximate
+**Scenario 1**: there is a weak positive relations between $p$ and $m$ in the log-scale, thus on the normal scale, we can approximate
 $p$ as a constant and not dependent to $m$, i.e.:
 
 $$
@@ -182,7 +184,7 @@ Note since $\alpha > 1$, we have $k_2/k_1 < \alpha^2$.
 
 In the equation, it also shows the expansion of the citation network can be decomposed into two parts, the part without 
 citation enrichment which grows in quadratic speed ($\sim \alpha^2$), and the "over-represented" part which grows in linear
-speed ($\sim \alpha$). Mixing these two speeds results the final speed being weak than quadratic.
+speed ($\sim \alpha$, the second line in the equation above). Mixing these two speeds results the final speed being weak than quadratic.
 
 
 **Scenario 2**: let's assume there is the following relation where $p$ is dependent on $\log m$. Note for simplicity we 
@@ -192,9 +194,9 @@ $$
 p = w \log(m)
 $$
 
-where $w$ is slop coeffcient from the liear fit.
+where $w$ is slop coefficient from the linear fit.
 
-Then $k_2/$k_1$ can be written as:
+Then $k_2/k_1$ can be written as:
 
 $$
 \begin{align*}
@@ -207,7 +209,7 @@ $$
 
 where $\log m_1$ is much larger than $\log \alpha$, which also results in $k_2/k_1 < \alpha^2$.
 
-In this case, in the expansion of the citation network, the "over-represented" part grows in a speed of $\sim \alpha \log \alpha$, but
+In this case, in the expansion of the citation network, the "over-represented" part grows in a speed of $\sim \alpha \log \alpha$ (the second line in the equation above), but
 still slower than the quadratic.
 
 For both scenarios, we can have:

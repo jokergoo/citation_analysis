@@ -1,5 +1,5 @@
 ---
-title: "Domestic citation analysis"
+title: "Distribution of domestic enrichment scores"
 author: "Zuguang Gu ( z.gu@dkfz.de )"
 date: '`r Sys.Date()`'
 output: 
@@ -21,8 +21,8 @@ knitr::opts_chunk$set(
 ```
 
 
-The number of citations from country A to country B follows a hypergeometric distribution $X \sim \mathrm{hyper}(m, n, N)$
-where $m$ is the total number of citations that B is cited, $n$ is the total number of citations that A cites, $N$ is the
+The number of domestic citations of country _A_ follows a hypergeometric distribution $X \sim \mathrm{hyper}(m, n, N)$
+where $m$ is the total number of citations that _A_ is cited, $n$ is the total number of citations that _A_ cites, $N$ is the
 total number of citations in the globe. To simplify the problem, we use the binomial approximation of the hypergeometric 
 distribution: $X \sim \mathrm{Bi}(p, n)$ where $p = m/N$. The fold enrichment is calculated as
 
@@ -31,7 +31,7 @@ $$
 r = \frac{k}{k_\mathrm{exp}} = \frac{k}{np}
 $$
 
-where $k$ is the observed number of citations from A to B.
+where $k$ is the observed number of domestic citations.
 
 Assume the observed $k$ has a offset to the expected $k_\mathrm{exp}$ of $a \cdot \sigma$ where $\sigma$ is the standard deviation
 of the bimonial distribution, then
@@ -40,7 +40,7 @@ $$
 k = np + a \cdot \sigma = np + a \sqrt{np(1-p)}
 $$
 
-And finally we can have the relation between $r$ and $k$ as:
+And we can have the relation between $r$ and $k$ as:
 
 $$
 r = \frac{\sqrt{1 + \frac{4k}{a^2(1-p)}} + 1}{\sqrt{1 + \frac{4k}{a^2(1-p)}} - 1}
@@ -58,7 +58,7 @@ f = function(k, a = 1, p = 0.5) {
 
 We can demonstrate the relation between $\log_2(r)$ and $k$ by a simple simulation. We generate a list of random $k$
 from the binomial distribution where the size $n$ is also randomly generated where $\log_{10}(n)$ is from a uniform
-distribution in the internal $[2, 6]$.
+distribution in the internal $[3, 7]$.
 
 
 ```{r}
@@ -68,7 +68,7 @@ size = round(10^(runif(10000, min = 3, max = 7)))
 k = sapply(size, function(x) rbinom(1, x, p))
 ```
 
-We plot $\log_2(r)$ verse $k$, also their theoretical relation:
+We plot $\log_2(r)$ against $k$, also their theoretical relations (with one and two offsets of $\sigma$ to the expected value):
 
 ```{r}
 plot(k, log2(k/(size*p)), log = "x", pch = 16, cex = 0.5, col = "#00000080")
@@ -76,11 +76,12 @@ plot(k, log2(k/(size*p)), log = "x", pch = 16, cex = 0.5, col = "#00000080")
 od = order(k)
 lines(k[od], f(k[od], a = 1, p = p), col = 2)
 lines(k[od], f(k[od], a = 2, p = p), col = 3)
+lines(k[od], f(k[od], a = 3, p = p), col = 4)
 
-legend("topright", legend = c("exp + 1*sd", "exp + 2*sd"), lty = 1, col = 2:3)
+legend("topright", legend = c("exp + 1*sd", "exp + 2*sd", "exp + 3*sd"), lty = 1, col = 2:4)
 ```
 
-So we can see the log2 fold enrichment decreases when the number of citations increases.
+So here we can see the log2 fold enrichment (when the enrichment is positive) decreases when the number of citations increases.
 
 <br>
 <br>

@@ -115,7 +115,7 @@ plot_grid(p1, p2, nrow = 1)
 
 
 Next we apply UMAP and t-SNE dimension reduction methods. Note they need a complete matrix with no `NA` value.
-Thus, we impute the `NA` values with the **impute** package.
+Thus, we first impute the `NA` values with the **impute** package.
 
 ```{r}
 library(impute)
