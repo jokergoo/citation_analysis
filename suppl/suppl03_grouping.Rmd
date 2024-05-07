@@ -58,7 +58,7 @@ robust_dist = function(m, trim = 0.1) {
 ```
 
 
-We load the data. `m` is the influence matrix between 72 countries. `mem` is the clustering results from the graph clustering analysis.
+We load the data. `m` is the influence matrix of 72 countries. `mem` is the clustering results from the graph clustering analysis.
 
 ```{r}
 m = readRDS("mat_influence.rds")

@@ -34,19 +34,19 @@ $$
 where $k$ is the observed number of domestic citations.
 
 Assume the observed $k$ has a offset to the expected $k_\mathrm{exp}$ of $a \cdot \sigma$ where $\sigma$ is the standard deviation
-of the bimonial distribution, then
+of the bimonial distribution and $a$ is the fold factor on $\sigma$, then
 
 $$
 k = np + a \cdot \sigma = np + a \sqrt{np(1-p)}
 $$
 
-And we can have the relation between $r$ and $k$ as:
+And we can have the relation between $r$ and $k$ (by cancelling $n$) as:
 
 $$
 r = \frac{\sqrt{1 + \frac{4k}{a^2(1-p)}} + 1}{\sqrt{1 + \frac{4k}{a^2(1-p)}} - 1}
 $$
 
-We can write a function which calculates $\log_2(r)$ based on the value of $k$:
+We can write a function which calculates $\log_2 r$ based on the value of $k$:
 
 ```{r}
 f = function(k, a = 1, p = 0.5) {
@@ -56,8 +56,8 @@ f = function(k, a = 1, p = 0.5) {
 }
 ```
 
-We can demonstrate the relation between $\log_2(r)$ and $k$ by a simple simulation. We generate a list of random $k$
-from the binomial distribution where the size $n$ is also randomly generated where $\log_{10}(n)$ is from a uniform
+We then demonstrate the relation between $\log_2 r$ and $k$ by a simple simulation. We generate a list of random $k$
+from the binomial distribution where the size $n$ is also randomly generated where $\log_{10} n$ is from a uniform
 distribution in the internal $[3, 7]$.
 
 
@@ -68,10 +68,10 @@ size = round(10^(runif(10000, min = 3, max = 7)))
 k = sapply(size, function(x) rbinom(1, x, p))
 ```
 
-We plot $\log_2(r)$ against $k$, also their theoretical relations (with one and two offsets of $\sigma$ to the expected value):
+We plot $\log_2 r$ against $k$, also their theoretical relations (with 1/2/3 offsets of $\sigma$ to the expected value):
 
 ```{r}
-plot(k, log2(k/(size*p)), log = "x", pch = 16, cex = 0.5, col = "#00000080")
+plot(k, log2(k/(size*p)), log = "x", pch = 16, cex = 0.5, col = "#00000080", ylab = "log2(r)")
 
 od = order(k)
 lines(k[od], f(k[od], a = 1, p = p), col = 2)

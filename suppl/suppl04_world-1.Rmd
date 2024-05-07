@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 ```
 
 
-We load the data. `m` is the influence matrix between 72 countries. `mem` is the clustering results from the graph clustering analysis.
+We load the data. `m` is the influence matrix of 72 countries. `mem` is the clustering results from the graph clustering analysis.
 
 ```{r}
 library(ComplexHeatmap)

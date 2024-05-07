@@ -46,7 +46,7 @@ mem_name["Italy"] = "Europe-2"
 mem_color = structure(RColorBrewer::brewer.pal(length(setdiff(unique(mem_name), NA)), "Set1"), names = setdiff(unique(mem_name), NA))
 ```
 
-Obtain the enrichment scores on China and from China, removing Africa from the analysis.
+Obtain the enrichment scores on China and from China, and remove Africa from the analysis.
 
 ```{r}
 x1 = m[, "China"]
@@ -59,7 +59,7 @@ x1 = x1[l]
 x2 = x2[l]
 ```
 
-We take $y=x$ as the baseline for the linear fit
+We take $y=x$ as the baseline for the linear fit.
 
 ```{r}
 rotate_lm = function(y, x) {
@@ -124,6 +124,10 @@ slop = fit$coefficients[2]
 intercept = fit$coefficients[1]
 grid.lines(range(x1[l]), intercept + slop*range(x1[l]), default.units = "native", gp = gpar(col = mem_color["Europe-3"], lwd = 2))
 
+library(ComplexHeatmap)
+lgd = Legend(title = "Region", at = c("World-1", "Asia-1", "Mid-East", "Europe-3"),
+    type = "lines", legend_gp = gpar(col = mem_color[c(c("West-1", "Asia-1", "Mid-East", "Europe-3"))]))
+draw(lgd, x = unit(-1.5, "native"), y = unit(1.5, "native"), just = c("top", "left"))
 
 popViewport()
 ```

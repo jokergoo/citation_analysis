@@ -312,7 +312,7 @@ m_with_NA[m == 0] = NA
 row_order = order.dendrogram(reorder(as.dendrogram(hclust(robust_dist(m_with_NA))), -rowMeans(m_with_NA, na.rm = TRUE)))
 col_order = order.dendrogram(reorder(as.dendrogram(hclust(robust_dist(t(m_with_NA)))), -colMeans(m_with_NA, na.rm = TRUE)))
 
-pdf("figures/figure5.pdf", width = 10, height = 10)
+pdf("figures/figure5.pdf", width = 10, height = 11)
 ht = Heatmap(m, name = "Enrichment score", #cluster_rows = hc, cluster_columns = hc,
 	row_title = "Cited/influencing countries",
 	column_title = "Citing/influenced countries", column_title_side = "bottom",
@@ -327,18 +327,23 @@ ht = Heatmap(m, name = "Enrichment score", #cluster_rows = hc, cluster_columns =
 	right_annotation = rowAnnotation(Region = country_meta[rownames(m), "region"], 
 									Group = mem_name[rownames(m)],
 		                             "#cited" = anno_barplot(sqrt(as.vector(n_cited[rownames(m)])), ylim = c(0, 8000), axis_param = list(at = c(0,2000,4000,6000,8000), labels = c("0", "4M", "16M", "36M", "64M"))),
-		                             col = list(Region = region_color, Group = mem_color)),
+		                             col = list(Region = region_color, Group = mem_color),
+		                             annotation_legend_param = list(Region = list(nrow = 3), Group = list(nrow = 3))
+	),
 	top_annotation = HeatmapAnnotation(Region = country_meta[colnames(m), "region"], 
 										Group = mem_name[colnames(m)],
 		                               "#citing" = anno_barplot(sqrt(as.vector(n_citing[colnames(m)])), ylim = c(0, 8000), axis_param = list(at = c(0,2000,4000,6000,8000), labels = c("0", "4M", "16M", "36M", "64M"))),
-		                               col = list(Region = region_color, Group = mem_color)),
+		                               col = list(Region = region_color, Group = mem_color),
+		                               annotation_legend_param = list(Region = list(nrow = 3), Group = list(nrow = 3))
+	),
+	heatmap_legend_param = list(direction = "horizontal", legend_width = unit(4, "cm")),
 	cluster_row_slices = FALSE, cluster_column_slices = FALSE,
 	row_split = factor(as.character(mem[rownames(m)]), levels = row_slice_hc$labels[row_slice_hc$order]),
 	column_split = factor(as.character(mem[colnames(m)]), levels = col_slice_hc$labels[col_slice_hc$order]),
 	border = "black"
-
 )
 draw(ht, merge_legend = TRUE, column_title = "Enrichment of citations between countries",
+	heatmap_legend_side = "bottom",
 	heatmap_legend_list = list(Legend(at = "Not available", legend_gp = gpar(fill = "#DDDDDD"))))
 dev.off()
 
@@ -712,17 +717,54 @@ ht = Heatmap(subm, name = "Enrichment score", #cluster_rows = hc, cluster_column
 	show_row_dend = FALSE, show_column_dend = FALSE,
 	border = "black",
 	width = unit(4, "mm")*nrow(subm),
+	height = unit(4, "mm")*ncol(subm),
+	show_heatmap_legend = FALSE
+)
+
+
+p1 = grid.grabExpr(draw(ht, column_title = "A) Influence map only of West-1 countries"))
+
+
+
+cn = setdiff(lt[["4"]], c("Spain", "Italy"))
+subm = m[cn, cn]
+subm2 = subm
+subm2[subm2 == 0] = NA
+subm2 = impute.knn(subm2)$data
+
+split = cutree(hclust(dist(subm2)), k = 2)
+
+ht = Heatmap(subm, name = "Enrichment score", #cluster_rows = hc, cluster_columns = hc,
+	row_title = "Cited/influencing countries",
+	column_title = "Citing/influenced countries", column_title_side = "bottom",
+	col = col_fun,
+	row_split = split, column_split = split,
+	right_annotation = rowAnnotation(
+		"#cited" = anno_barplot(sqrt(as.vector(n_cited[rownames(subm)])), axis_param = list(at = c(0, sqrt(100000), sqrt(400000)), labels = c("0", "100K", "400K"))),
+		show_legend = FALSE
+	),
+	top_annotation = HeatmapAnnotation(
+		"#citing" = anno_barplot(sqrt(as.vector(n_citing[colnames(subm)])), axis_param = list(at = c(0, sqrt(100000), sqrt(500000), 1000), labels = c("0", "100K", "500K", "1M"))),
+		show_legend = FALSE
+	),
+	layer_fun = function(j, i, x, y, w, h, fill) {
+		l = pindex(subm, i, j) == 0
+		if(any(l)) grid.rect(x[l], y[l], w[l], h[l], gp = gpar(fill = "#DDDDDD", col = "#DDDDDD"))
+	},
+	cluster_row_slices = FALSE, cluster_column_slices = FALSE,
+	show_row_dend = FALSE, show_column_dend = FALSE,
+	border = "black",
+	width = unit(4, "mm")*nrow(subm),
 	height = unit(4, "mm")*ncol(subm)
 )
 
-pdf("figures/figure7.pdf", width = 8, height = 7)
-
-ht = draw(ht, column_title = "Influence map only in West-1 countries",
+p2 = grid.grabExpr(draw(ht, column_title = "B) Influence map only of Europe-3 countries",
 	heatmap_legend_list = list(Legend(at = "Not available", legend_gp = gpar(fill = "#DDDDDD"))))
-draw(ht)
+)
+
+pdf("figures/figure7.pdf", width = 14, height = 7)
+print(plot_grid(p1, p2, nrow = 1))
 dev.off()
-
-
 
 ###### balance
 library(GetoptLong)

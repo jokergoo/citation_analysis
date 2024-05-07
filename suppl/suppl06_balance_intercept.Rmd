@@ -1,5 +1,5 @@
 ---
-title: "Balance analysis - the intercept coeffcient"
+title: "Balance analysis - the intercept coefficient"
 author: "Zuguang Gu ( z.gu@dkfz.de )"
 date: '`r Sys.Date()`'
 output: 
