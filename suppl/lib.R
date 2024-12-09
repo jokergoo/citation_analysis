@@ -10,8 +10,8 @@ calc_stat = function(df, cutoff_total = 10000, cutoff_single = 100, min_country 
 	df$total_cited = total_cited[df[, 1]]
 	df$total_citing = total_citing[df[, 2]]
 	df$global_citations = N
-	df$p_cited = df[, 3]/total_cited[df[, 1]]
-	df$p_citing = df[, 3]/total_citing[df[, 2]]
+	df$p_cited = df[, 3]/total_citing[df[, 2]]
+	df$p_citing = df[, 3]/total_cited[df[, 1]]
 	df$p_global_cited = total_cited[df[, 1]]/N
 	df$p_global_citing = total_citing[df[, 2]]/N
 

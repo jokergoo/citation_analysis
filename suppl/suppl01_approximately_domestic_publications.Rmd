@@ -1,0 +1,59 @@
+---
+title: "Approximately domestic publications"
+author: "Zuguang Gu ( z.gu@dkfz.de )"
+date: '`r Sys.Date()`'
+output: 
+  html_document:
+    toc: true
+    fig_caption: true
+---
+
+```{r, echo = FALSE, message = FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+    error = FALSE,
+    tidy  = FALSE,
+    message = FALSE,
+    warning = FALSE,
+    echo = FALSE,
+    fig.width = 6, fig.height = 6,
+    fig.align = "center"
+)
+```
+
+In current bibliometrics studies, a domestic publication is required to have
+all authors affiliated to the same country. However, according to my
+experience as a long-term biology researcher, in biology publications
+there are also cases where a small fraction (< 20%) of international authors exist in
+the middle of the author list, but this won't affect the fact that the
+research conducted in the publication is domestic to that country.
+
+In the following example ([pmid: 10708385 from PubMed](https://pubmed.ncbi.nlm.nih.gov/10708385/)), there are nine authors where eight are from Spain.
+There is only one "international" author which is on location seven of the author
+list. We would assume this author contributes less than other authors and we
+would take this publication as a domestic publication of Spain.
+
+```{r}
+include_graphics("1.png")
+```
+
+If we call domestic publications where all authors are from the same country
+"*the strictly domestic publications*", and publications where we allow a small
+fraction of international authors in the middle of the author list "*the
+approximately domestic publications*". The followng plot illustrates the
+fraction of approximately domestic publications in different countries. On
+average, approximately domestic publications only contribute 5.2% to all
+domenstic publications.
+
+
+```{r}
+include_graphics("2.png")
+```
+
+Including the approximately domestic publications or not won't affect the
+citation enrichment analysis conducted in this work. The following plot shows
+the log2 citation enrichments from the two settings are almost perfectly linear.
+
+```{r, out.width = "60%"}
+include_graphics("3.png")
+```

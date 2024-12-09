@@ -109,13 +109,13 @@ calc_stat = function(df, cutoff_total = 10000, cutoff_single = 100, min_country 
 
 	N = sum(total_cited)
 
-	df$total_cited = total_cited[df[, 1]]
-	df$total_citing = total_citing[df[, 2]]
-	df$global_citations = N
-	df$p_cited = df[, 3]/total_cited[df[, 1]]
-	df$p_citing = df[, 3]/total_citing[df[, 2]]
-	df$p_global_cited = total_cited[df[, 1]]/N
-	df$p_global_citing = total_citing[df[, 2]]/N
+	df$total_cited = total_cited[df[, 1]]         # m
+	df$total_citing = total_citing[df[, 2]]       # n
+	df$global_citations = N                       # N
+	df$p_cited = df[, 3]/total_citing[df[, 2]]   # k/n
+	df$p_citing = df[, 3]/total_cited[df[, 1]]     # k/m
+	df$p_global_cited = total_cited[df[, 1]]/N    # m/N
+	df$p_global_citing = total_citing[df[, 2]]/N  # n/N
 
 	df$expected = as.numeric(total_cited[df[, 1]])*total_citing[df[, 2]]/N
 	df$var_hyper = total_cited[df[, 1]]*(total_citing[df[, 2]]/N)*((N - total_citing[df[, 2]])/N)*((N - total_cited[df[, 1]])/(N-1))
@@ -127,11 +127,6 @@ calc_stat = function(df, cutoff_total = 10000, cutoff_single = 100, min_country 
 	cn = intersect(names(total_cited[total_cited > cutoff_total]), names(total_citing[total_citing > cutoff_total]))
 
 	df = df[df[, 1] %in% cn & df[, 2] %in% cn, , drop = FALSE]
-
-	cn1 = names(total_cited[total_cited > cutoff_total])
-	cn2 = names(total_citing[total_citing > cutoff_total])
-
-	df = df[df[, 1] %in% cn1 & df[, 2] %in% cn2, , drop = FALSE]
 
 	df = df[df[, 3] >= cutoff_single, , drop = FALSE]
 
@@ -200,12 +195,12 @@ p1 = ggplot(df, aes(x = citations, y = log2_fc, col = cate)) + geom_point(size =
 
 rk1 = sapply(split(df, df$country_cited), function(x) {
 	i = which(x$country_cited == x$country_citing)
-	rank(-x$p_cited)[i]
+	rank(-x$p_citing)[i]
 })
 
 rk2 = sapply(split(df, df$country_citing), function(x) {
 	i = which(x$country_cited == x$country_citing)
-	rank(-x$p_citing)[i]
+	rank(-x$p_cited)[i]
 })
 
 df2 = df[df$country_cited == df$country_citing, ]
@@ -239,6 +234,7 @@ all_countries = rownames(m)
 
 m2 = m
 m2[m2 < 0] = 0
+m2[is.na(m2)] = 0
 library(igraph)
 
 set.seed(123)
@@ -770,16 +766,25 @@ dev.off()
 library(GetoptLong)
 country = "United States"
 
+count =  xtabs(citations ~ country_cited + country_citing, data = df)
+class(count) = "matrix"
+
+
 do_country = function(country, name, a1 = 1, a2 = 1, b1 = 3, b2 = 3) {
 
 	x1 = m_with_NA[, country]
 	x2 = m_with_NA[country, ]
-	
 	x2 = x2[names(x1)]
+
+	c1 = count[, country]
+	c2 = count[country, ]
+	c2 = c2[names(c1)]
 
 	l = x1 != 0 & x2 != 0 & !is.na(x1) & !is.na(x2) & (!names(x1) %in% mel[["Africa"]])
 	x1 = x1[l]
 	x2 = x2[l]
+	c1 = c1[l]
+	c2 = c2[l]
 
 	max = 1.5
 	
@@ -877,6 +882,12 @@ abline(v = 1, col = "grey")
 tbb2 = apply(tbb, 2, scale)
 rownames(tbb2) = rownames(tbb)
 
+switch_dend = function(dend) {
+	foo = dend
+	dend[[1]] = foo[[2]]
+	dend[[2]] = foo[[1]]
+	dend
+}
 
 pdf("figures/figure8.pdf", width = 15, height = 6)
 grid.newpage()
@@ -926,7 +937,10 @@ grid.segments(unit(c(10, 11, 12)+0.3, "cm"), unit(12.3, "cm"), unit(c(10, 11, 12
 grid.text(c(0, 1, 2), unit(c(10, 11, 12)+0.3, "cm"), unit(12, "cm"), gp = gpar(fontsize = 7, col = "#808080"), just = "top")
 
 pushViewport(viewport(x = unit(30.5, "cm"), y = unit(13, "cm"), width = unit(5, "cm"), height = unit(6, "cm"), just = c("left", "top")))
-plot_hc(hclust(dist(tbb2)), ann = FALSE, fontsize = 10)
+dend = as.dendrogram(hclust(dist(tbb2)))
+dend[[1]] = switch_dend(dend[[1]])
+dend[[2]] = switch_dend(dend[[2]])
+plot_hc(as.hclust(dend), ann = FALSE, fontsize = 10)
 popViewport()
 dev.off()
 

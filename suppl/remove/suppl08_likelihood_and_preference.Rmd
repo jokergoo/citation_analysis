@@ -1,0 +1,84 @@
+---
+title: "Likelihood and preference of domestic citations"
+author: "Zuguang Gu ( z.gu@dkfz.de )"
+date: '`r Sys.Date()`'
+output: 
+  html_document:
+    toc: true
+    fig_caption: true
+---
+
+```{r, echo = FALSE, message = FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+    error = FALSE,
+    tidy  = FALSE,
+    message = FALSE,
+    warning = FALSE,
+    fig.align = "center"
+)
+```
+
+```{r}
+source("lib.R")
+
+df = read.table("num_cite_country_country.tab", quote = "", sep = "\t", header = TRUE)
+df = calc_stat(df, cutoff_total = 10000, cutoff_single = 100, all = TRUE)
+df2 = df[df$country_cited == df$country_citing, ]
+head(df2)
+```
+
+We use the following columns from `df2`:
+
+- `country_cited` or `country_citing`: denoted as $A$.
+- `citations`: total number of domestic citations, denoted as $k$.
+- `total_cited`: total number of times $A$ is cited by the globe, denoted as $m_{A-}$.
+- `total_citing`: total number of times $A$ cites in the globe, denoted as $n_{-A}$.
+- `global_citations`: total number of citations in the globe, denoted as $N$.
+- `p_cited`: for all citations made by $A$, fraction of $A$ itself being cited, $k/n_{-A}$.
+- `p_citing`: for all citations $A$ receives, fraction of $A$ itself cites, $k/m_{A-}$.
+- `p_global_cited`: fraction of global citations where $A$ is cited, $m_{A-}/N$.
+- `p_global_citing`: fraction of global citations where $A$ cites, $n_{-A}/N$.
+
+The four probabilities can be rephrased as:
+
+- `p_cited`: given a reference from $A$, the probability of $A$ is cited, $P(A-|-A)$.
+- `p_citing`: given a publication from $A$, the probability of being cited by $A$, $P(-A|A-)$.
+- `p_global_cited`: the probability of $A$ is cited, $P(A-)$.
+- `p_global_citing`: the probability of $A$ cites, $P(-A)$.
+
+$P(A-|-A)$ and $P(-A|A-)$ are the likelihoods of $A$ is cited or cites given the corresponding publication/reference is also from $A$.
+
+And the enrichment score $s$ can be written in one of the following two forms:
+
+$$
+\begin{aligned}
+s &= \log_2 P(A-|-A) - \log_2 P(A-) \\
+s &= \log_2 P(-A|A-) - \log_2 P(-A) \\
+\end{aligned}
+$$
+
+It is easy to see, the enrichment score is the likelihood corrected by the global effect.
+
+Next we directly look at the relations between the enrichment score and likelihood:
+
+```{r, fig.width = 10, fig.height = 5}
+l = df2$log2_fc > 8
+par(mfrow = c(1, 2))
+plot(df2$log2_fc, df2$p_cited, log = "y", xlab = "enrichment score", ylab = "P(A-|-A)",
+	col = ifelse(l, 2, 1))
+plot(df2$log2_fc, df2$p_citing, log = "y", xlab = "enrichment score", ylab = "P(-A|A-)",
+	col = ifelse(l, 2, 1))
+```
+
+First the likelihood of the .. For countries with larger citation volumns, as the volumn increases, the likelihood of domestic publications are cited given a citing publictaion is also from $A$ increases. However, when the enrichment sores reach around 8, 
+
+```{r, fig.width = 10, fig.height = 5}
+par(mfrow = c(1, 2))
+plot(df2$p_global_cited, df2$p_cited, log = "xy", cex = df2$log2_fc/5, col = ifelse(l, 2, 1))
+plot(df2$p_global_citing, df2$p_citing, log = "xy", cex = df2$log2_fc/5, col = ifelse(l, 2, 1))
+```
+
+```{r, fig.width = 5, fig.height = 5}
+plot(df2$log2_fc, df2$total_citing/df2$total_cited, log = "y", col = ifelse(l, 2, 1))
+```

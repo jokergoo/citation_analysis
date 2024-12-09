@@ -85,7 +85,8 @@ rotate_lm = function(y, x) {
 }
 ```
 
-Then for World-1, Asia-1, Mid-East and Europe-3, we fit a linear regression model on each country group.
+Then for World-1, Asia-1, Mid-East and Europe-3, we fit a linear regression model on each country group. Asia-2 is removed because
+there is no reliable fit.
 
 ```{r, fig.width = 7, fig.height = 7}
 max = 2

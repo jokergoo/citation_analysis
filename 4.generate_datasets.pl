@@ -60,6 +60,9 @@ my $journal = {};
 my $pub = {};
 my $pub_other = {};
 my $cite = {};
+my $ct = "";
+
+my $included = {};
 
 my $file;
 my $count = {
@@ -88,9 +91,11 @@ for(my $i = $start; $i <= $end; $i ++) {
 
 		my @issn = split ",", $line[3];
 		my $issn_flag = 0;
+		my $cate = "";
 		foreach my $is (@issn) {
 			if(defined($wos_core_journals->{$is})) {  # in wos core collection
 				$issn_flag = 1;
+				$cate = $wos_core_journals->{$is};
 				next;
 			}
 		}
@@ -103,24 +108,36 @@ for(my $i = $start; $i <= $end; $i ++) {
 			$journal->{$line[5]} = {"journal" => $line[1],
 			                        "journal_abbr" => $line[2],
 			                        "journal_issn" => $line[3],
-			                        "journal_country" => $line[4]};
+			                        "journal_country" => $line[4],
+			                        "journal_category" => $cate
+			                    };
 		}
 
 		# citations
 		my @ref = split ";", $line[10], -1;
 		foreach my $x (@ref) {
 			$cite->{$line[0]}->{$x} = 1;
+
+			$included->{$line[0]} = 1;
+			$included->{$x} = 1;
 		}
 
 		my $c = determine_country($line[11]);
 
 		if($c !~/^_/) {
 			# papers are restrctedin wos core collection and have clear country assigned
+
+			if($c =~/_80$/) {
+				$c =~s/_80$//;
+				$ct = "_domestic_80_";
+			} else {
+				$ct = "_domestic_";
+			}
 			$pub->{$line[0]} = {"journal_uid" => $line[5],
 					            "pub_year" => $line[7],
 				                "n_authors" => $line[8],
 				                "country" => $c,
-				                "country_type" => "_domestic_",
+				                "country_type" => $ct,
 				                "file_id" => $i,
 				                "n_references" => scalar @ref
 				            };
@@ -177,6 +194,10 @@ sub determine_country {
 		return "_empty_";
 	}
 
+	if($country =~/^\s*(;\s*)+$/) {
+		return "_empty_";
+	}
+
 	my $c1 = [ split ";", $country, -1 ];
 	my $c2 = [];
 	for(my $i = 0; $i <= $#$c1; $i ++) {
@@ -188,16 +209,20 @@ sub determine_country {
 		}
 	}
 
+	# last author can only be in one single country
+	if(n_unique($c2->[$#$c2]) == 0) {
+		return "_international_";
+	}
+
+	if(n_unique($c2->[$#$c2]) > 1) {
+		return "_international_";
+	}
 
 	# first author should not be in more than one country, but the value can be zero
 	if(n_unique($c2->[0]) > 1) {
 		return "_international_";
 	}
 
-	# last author can only be in one single country
-	if(n_unique($c2->[$#$c2]) != 1) {
-		return "_international_";
-	}
 
 	my $major_country = $c2->[$#$c2]->[0];
 
@@ -239,7 +264,7 @@ sub determine_country {
 		my $max = which_max_hash($tb);
 		if($tb->{$max}/sum([values %$tb]) >= 0.8) {
 			if($max eq $major_country) {
-				return $major_country
+				return $major_country."_80";
 			} else {
 				return "_international_";
 			}
@@ -280,9 +305,9 @@ sub n_unique {
 
 print "journal_meta.tab\n";
 open OUT, ">processed/journal_meta.tab" or die;
-print OUT "journal_uid\tjournal\tjournal_abbr\tjournal_issn\tjournal_country\n";
+print OUT "journal_uid\tjournal\tjournal_abbr\tjournal_issn\tjournal_country\tjournal_category\n";
 foreach my $x (sort keys %$journal) {
-	print OUT "$x\t$journal->{$x}->{journal}\t$journal->{$x}->{journal_abbr}\t$journal->{$x}->{journal_issn}\t$journal->{$x}->{journal_country}\n";
+	print OUT "$x\t$journal->{$x}->{journal}\t$journal->{$x}->{journal_abbr}\t$journal->{$x}->{journal_issn}\t$journal->{$x}->{journal_country}\t$journal->{$x}->{journal_category}\n";
 }
 close OUT;
 
@@ -291,24 +316,29 @@ print "pub_meta.tab\n";
 open OUT, ">processed/pub_meta.tab" or die;
 print OUT "pmid\tjournal_uid\tpub_year\tn_authors\tcountry\tcountry_type\tfile_id\tn_references\n";
 foreach my $x (sort keys %$pub) {
-	print OUT "$x\t$pub->{$x}->{journal_uid}\t$pub->{$x}->{pub_year}\t$pub->{$x}->{n_authors}\t$pub->{$x}->{country}\t$pub->{$x}->{country_type}\t$pub->{$x}->{file_id}\t$pub->{$x}->{n_references}\n";
+	if($included->{$x}) {
+		print OUT "$x\t$pub->{$x}->{journal_uid}\t$pub->{$x}->{pub_year}\t$pub->{$x}->{n_authors}\t$pub->{$x}->{country}\t$pub->{$x}->{country_type}\t$pub->{$x}->{file_id}\t$pub->{$x}->{n_references}\n";
+	}
 }
 close OUT;
 
-# # international publications
-# print "pub_other_meta.tab\n";
-# open OUT, ">processed/pub_other_meta.tab" or die;
-# print OUT "pmid\tjournal_uid\tpub_year\tn_authors\tcountry\tcountry_type\tfile_id\tn_references\n";
-# foreach my $x (sort keys %$pub_other) {
-# 	print OUT "$x\t$pub_other->{$x}->{journal_uid}\t$pub_other->{$x}->{pub_year}\t$pub_other->{$x}->{n_authors}\t$pub_other->{$x}->{country}\t$pub_other->{$x}->{country_type}\t$pub_other->{$x}->{file_id}\t$pub_other->{$x}->{n_references}\n";
-# }
-# close OUT;
+# international publications
+print "pub_other_meta.tab\n";
+open OUT, ">processed/pub_other_meta.tab" or die;
+print OUT "pmid\tjournal_uid\tpub_year\tn_authors\tcountry\tcountry_type\tfile_id\tn_references\n";
+foreach my $x (sort keys %$pub_other) {
+	if($included->{$x} and !defined($pub->{$x})) {
+		print OUT "$x\t$pub_other->{$x}->{journal_uid}\t$pub_other->{$x}->{pub_year}\t$pub_other->{$x}->{n_authors}\t$pub_other->{$x}->{country}\t$pub_other->{$x}->{country_type}\t$pub_other->{$x}->{file_id}\t$pub_other->{$x}->{n_references}\n";
+	}
+}
+close OUT;
 
 
 # includes all citations for papers between 2000-2023
 print "citations.tab\n";
 open OUT, ">processed/citations.tab" or die;
 print OUT "citing\tcited\n";
+
 foreach my $x (sort keys %$cite) {
 	if(!defined($pub->{$x})) {  # only wos core journals is included in $pub
 		next;
@@ -326,15 +356,18 @@ exit 0;
 
 
 # also contain international publications
-print "citations_full.tab\n";
-open OUT, ">processed/citations_full.tab" or die;
+print "citations_others.tab\n";
+open OUT, ">processed/citations_others.tab" or die;
 print OUT "citing\tcited\n";
 foreach my $x (sort keys %$cite) {
-	if(!defined($pub->{$x}) and !defined($pub_other->{$x})) {  # only wos core journals is included in $pub
+	if(!(defined($pub->{$x}) or defined($pub_other->{$x}))) {  # only wos core journals is included in $pub
 		next;
 	}
 	foreach my $y (sort keys %{$cite->{$x}}) {
-		if(!defined($pub->{$y}) and !defined($pub_other->{$y})) {
+		if(!(defined($pub->{$y}) or defined($pub_other->{$y}))) {  # only wos core journals is included in $pub
+			next;
+		}
+		if(defined($pub->{$y}) and defined($pub->{$x})) {
 			next;
 		}
 		print OUT "$x\t$y\n";
@@ -344,133 +377,133 @@ close OUT;
 
 
 
-##############################
-## impact factors, only between papers dominant in single countries
-##############################
+# ##############################
+# ## impact factors, only between papers dominant in single countries
+# ##############################
 
-# papers that have no citation
-my $has_citation = {};
-foreach my $x (sort keys %$cite) {
-	if(!defined($pub->{$x})) {  # only wos core journals is included in $pub
-		next;
-	}
-	foreach my $y (sort keys %{$cite->{$x}}) {
-		if(!defined($pub->{$y})) {
-			next;
-		}
-		$has_citation->{$y} = 1;
-	}
-}
-my $has_no_citation = {};
-foreach my $x (keys %$pub) {
-	if(!defined($has_citation->{$x})) {
-		$has_no_citation->{$x} = 1;
-	}
-}
+# # papers that have no citation
+# my $has_citation = {};
+# foreach my $x (sort keys %$cite) {
+# 	if(!defined($pub->{$x})) {  # only wos core journals is included in $pub
+# 		next;
+# 	}
+# 	foreach my $y (sort keys %{$cite->{$x}}) {
+# 		if(!defined($pub->{$y})) {
+# 			next;
+# 		}
+# 		$has_citation->{$y} = 1;
+# 	}
+# }
+# my $has_no_citation = {};
+# foreach my $x (keys %$pub) {
+# 	if(!defined($has_citation->{$x})) {
+# 		$has_no_citation->{$x} = 1;
+# 	}
+# }
 
-my $IF;
+# my $IF;
 
-# all citations
-$IF = calc_IF("country", $cite, $pub);
-output_IF($IF, "IF_by_country.txt");
+# # all citations
+# $IF = calc_IF("country", $cite, $pub);
+# output_IF($IF, "IF_by_country.txt");
 
-# citations from the same country
-$IF = calc_IF("country", $cite, $pub, sub { $pub->{$_[0]}->{"country"} eq $pub->{$_[1]}->{"country"} });
-output_IF($IF, "IF_by_country_domistic.txt");
-
-
-# international citations
-$IF = calc_IF("country", $cite, $pub, sub { $pub->{$_[0]}->{"country"} ne $pub->{$_[1]}->{"country"} });
-output_IF($IF, "IF_by_country_international.txt");
-
-# citations only from US
-$IF = calc_IF("country", $cite, $pub, sub { $pub->{$_[1]}->{"country"} eq "United States"; });
-output_IF($IF, "IF_by_country_only_from_US.txt");
-
-$IF = calc_IF("country", $cite, $pub, sub { $pub->{$_[1]}->{"country"} eq "China"; });
-output_IF($IF, "IF_by_country_only_from_China.txt");
+# # citations from the same country
+# $IF = calc_IF("country", $cite, $pub, sub { $pub->{$_[0]}->{"country"} eq $pub->{$_[1]}->{"country"} });
+# output_IF($IF, "IF_by_country_domistic.txt");
 
 
-# IF by journal
-$IF = calc_IF("journal_uid", $cite, $pub);
-output_IF($IF, "IF_by_journal.txt");
+# # international citations
+# $IF = calc_IF("country", $cite, $pub, sub { $pub->{$_[0]}->{"country"} ne $pub->{$_[1]}->{"country"} });
+# output_IF($IF, "IF_by_country_international.txt");
+
+# # citations only from US
+# $IF = calc_IF("country", $cite, $pub, sub { $pub->{$_[1]}->{"country"} eq "United States"; });
+# output_IF($IF, "IF_by_country_only_from_US.txt");
+
+# $IF = calc_IF("country", $cite, $pub, sub { $pub->{$_[1]}->{"country"} eq "China"; });
+# output_IF($IF, "IF_by_country_only_from_China.txt");
 
 
-# general IF:
-# citation in year y, published in year x1-x2
-sub calc_IF {
-	my $type = shift;
-	my $cite = shift;
-	my $pub = shift;
-	my $restrict_fun = shift;
+# # IF by journal
+# $IF = calc_IF("journal_uid", $cite, $pub);
+# output_IF($IF, "IF_by_journal.txt");
 
-	no warnings;
 
-	if(!defined($restrict_fun)) {
-		$restrict_fun = sub {1;}
-	}
+# # general IF:
+# # citation in year y, published in year x1-x2
+# sub calc_IF {
+# 	my $type = shift;
+# 	my $cite = shift;
+# 	my $pub = shift;
+# 	my $restrict_fun = shift;
+
+# 	no warnings;
+
+# 	if(!defined($restrict_fun)) {
+# 		$restrict_fun = sub {1;}
+# 	}
 	
-	my $nc = {};
-	my $np = {};
+# 	my $nc = {};
+# 	my $np = {};
 
-	my $i = 0;
-	foreach my $x (keys %$cite) {
-		if(!defined($pub->{$x})) {
-			next;
-		}
-		foreach my $y (keys %{$cite->{$x}}) {
-			if(!defined($pub->{$y})) {
-				next;
-			}
+# 	my $i = 0;
+# 	foreach my $x (keys %$cite) {
+# 		if(!defined($pub->{$x})) {
+# 			next;
+# 		}
+# 		foreach my $y (keys %{$cite->{$x}}) {
+# 			if(!defined($pub->{$y})) {
+# 				next;
+# 			}
 
-			$i ++;
-			if($i % 10000 == 0) {
-				print "$i\n"; 
-			}
+# 			$i ++;
+# 			if($i % 10000 == 0) {
+# 				print "$i\n"; 
+# 			}
 
-			my $c = $pub->{$y}->{$type};
-			if($restrict_fun->($y, $x)) {
+# 			my $c = $pub->{$y}->{$type};
+# 			if($restrict_fun->($y, $x)) {
 				
-				if($pub->{$x}->{"pub_year"} - $pub->{$y}->{"pub_year"} == 1 or $pub->{$x}->{"pub_year"} - $pub->{$y}->{"pub_year"} == 2) {
-					$nc->{$c}->{$pub->{$x}->{"pub_year"}} ++;
-					$np->{$c}->{$pub->{$x}->{"pub_year"}}->{$y} = 1;
-				}
+# 				if($pub->{$x}->{"pub_year"} - $pub->{$y}->{"pub_year"} == 1 or $pub->{$x}->{"pub_year"} - $pub->{$y}->{"pub_year"} == 2) {
+# 					$nc->{$c}->{$pub->{$x}->{"pub_year"}} ++;
+# 					$np->{$c}->{$pub->{$x}->{"pub_year"}}->{$y} = 1;
+# 				}
 
-			}
-		}
-	}
+# 			}
+# 		}
+# 	}
 
-	foreach my $y (keys %$has_no_citation) {
-		my $c = $pub->{$y}->{$type};
-		if($pub->{$y}->{"pub_year"}+1 <= 2023) {
-			$np->{$c}->{$pub->{$y}->{"pub_year"}+1}->{$y} = 1;
-		}
-		if($pub->{$y}->{"pub_year"}+2 <= 2023) {
-			$np->{$c}->{$pub->{$y}->{"pub_year"}+2}->{$y} = 1;
-		}
-	}
+# 	foreach my $y (keys %$has_no_citation) {
+# 		my $c = $pub->{$y}->{$type};
+# 		if($pub->{$y}->{"pub_year"}+1 <= 2023) {
+# 			$np->{$c}->{$pub->{$y}->{"pub_year"}+1}->{$y} = 1;
+# 		}
+# 		if($pub->{$y}->{"pub_year"}+2 <= 2023) {
+# 			$np->{$c}->{$pub->{$y}->{"pub_year"}+2}->{$y} = 1;
+# 		}
+# 	}
 
-	my $IF = {};
-	foreach my $c (keys %$nc) {
-		foreach my $y (keys %{$nc->{$c}}) {
-			$IF->{$c}->{$y} = $nc->{$c}->{$y}/(scalar keys %{$np->{$c}->{$y}});
-		}
-	}
+# 	my $IF = {};
+# 	foreach my $c (keys %$nc) {
+# 		foreach my $y (keys %{$nc->{$c}}) {
+# 			$IF->{$c}->{$y} = $nc->{$c}->{$y}/(scalar keys %{$np->{$c}->{$y}});
+# 		}
+# 	}
 
-	return $IF;
-}
+# 	return $IF;
+# }
 
-sub output_IF {
-	my $IF = shift;
-	my $output = shift;
+# sub output_IF {
+# 	my $IF = shift;
+# 	my $output = shift;
 
-	open OUT, ">processed/$output" or die;
+# 	open OUT, ">processed/$output" or die;
 
-	foreach my $c (sort keys %$IF) {
-		foreach my $y (sort keys %{$IF->{$c}}) {
-			print OUT "$c\t$y\t$IF->{$c}->{$y}\n";
-		}
-	}
-	close OUT;
-}
+# 	foreach my $c (sort keys %$IF) {
+# 		foreach my $y (sort keys %{$IF->{$c}}) {
+# 			print OUT "$c\t$y\t$IF->{$c}->{$y}\n";
+# 		}
+# 	}
+# 	close OUT;
+# }
 
